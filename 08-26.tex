@@ -1,0 +1,126 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+\textbf{Notes 08/26}
+
+\textbf{Precedence of logical operations}
+
+\medskip
+
+\begin{tabular}{ll}
+$()$ & 0 \\
+$\lnot$ & 1 \\
+$\land$ & 2 \\
+$\lor$ & 3 \\
+$\to$ & 4 \\
+$\leftrightarrow$ & 5
+\end{tabular}
+
+\bigskip
+
+\textbf{Example.}
+
+\medskip
+
+\begin{tabular}{cc|cc|c|c|c}
+$p$ & $q$ & $\lnot p$ & $\lnot q$ & $p \lor \lnot q$ & $\lnot p \land \lnot q$ & $(p \lor \lnot q) \to (\lnot p \land \lnot q)$ \\
+\hline
+T & T & F & F & T & F & F \\
+T & F & F & T & T & F & F \\
+F & T & T & F & F & F & T \\
+F & F & T & T & T & T & T
+\end{tabular}
+
+\bigskip
+
+\textbf{Example.}
+
+\medskip
+
+\begin{tabular}{ccc|c|c|c}
+$p$ & $q$ & $r$ & $\lnot q$ & $p \land \lnot q$ & $(p \land \lnot q) \to r$ \\
+\hline
+T & T & T & F & F & T \\
+T & T & F & F & F & T \\
+T & F & T & T & T & T \\
+T & F & F & T & T & F \\
+F & T & T & F & F & T \\
+F & T & F & F & F & T \\
+F & F & T & T & F & T \\
+F & F & F & T & F & T
+\end{tabular}
+
+\bigskip
+
+If a proposition's premise is false, it is a vacuously true proposition.
+
+\bigskip
+
+\textbf{Logic puzzles}
+
+\medskip
+
+Angel tells the truth. Demon always lies.
+
+\medskip
+
+``Belial is an angel only when Melodi isn't an angel.''
+
+\medskip
+
+$b$ = Belial is an angel. $m$ = Melodi is an angel.
+
+\medskip
+
+\begin{tabular}{cc|c|c|c|c}
+$b$ & $m$ & $\lnot m$ & $b \to \lnot m$ & $b \leftrightarrow (b \to \lnot m)$ & $m \land \lnot b$ \\
+\hline
+T & T & F & F & F & F \\
+T & F & T & T & T & F \\
+F & T & F & T & F & T \\
+F & F & T & T & F & F
+\end{tabular}
+
+\medskip
+
+$m \leftrightarrow (m \land \lnot b)$
+
+\bigskip
+
+3 chests. 1 treasure, 1 truthful chest.
+
+\medskip
+
+Chest 1: ``empty chest.'' \quad Chest 2: ``empty chest.'' \quad Chest 3: ``in chest 2.''
+
+\medskip
+
+$p$ = treasure is in chest 1 (chest 1's claim is $\lnot p$)
+
+$q$ = treasure is in chest 2 (chest 2's claim is $\lnot q$)
+
+$r$ = treasure is in chest 3 (chest 3's claim is $q$)
+
+\medskip
+
+\begin{tabular}{ccc}
+$p$ & $q$ & $r$ \\
+\hline
+T & T & T \\
+T & T & F \\
+T & F & T \\
+T & F & F \\
+F & T & T \\
+F & T & F \\
+F & F & T \\
+F & F & F
+\end{tabular}
+
+\medskip
+
+Chest 2 is truthful; chest 1 has the treasure.
+
+\end{document}
