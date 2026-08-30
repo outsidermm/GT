@@ -1,0 +1,266 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+\textbf{MATH 1564 --- Notes 08/27}
+
+\bigskip
+
+\textbf{Theorem 1:} Let $Ax = b$ be a linear system on $m \times n$, and RREF of $[A \mid b]$ is $[R \mid d]$. Then:
+\begin{enumerate}
+\item $Ax = b$ has no solutions $\iff$ the $d$ column contains a pivot.
+\item If $Ax = b$ has a unique solution $\iff$ each column of $R$ is pivotal.
+\item If $Ax = b$ has infinitely many solutions $\iff$ some column of $R$ isn't pivotal.
+\end{enumerate}
+
+\medskip
+
+\textbf{Proof:}
+
+1. A pivot in the $d$ column gives the equation $0 \cdot x_1 + \cdots + 0 \cdot x_n = 1$, so no solutions.
+
+If the $d$-column contains no pivot, a solution can be written down in terms of free variables, if any.
+
+\bigskip
+
+2a/2b. Suppose there is no pivot in the $d$ column. Then the solution is unique iff there are no free variables.
+
+\newpage
+
+\textbf{Example:} Given
+\[
+[R \mid d] =
+\left[
+\begin{array}{ccccc|c}
+0 & 1 & 2 & 0 & 3 & 4 \\
+0 & 0 & 0 & 1 & -2 & -1 \\
+0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0
+\end{array}
+\right]
+\]
+with variables $x_1, x_2, x_3, x_4, x_5$. The pivots are in columns 2 and 4, so $x_2, x_4$ are pivotal and $x_1, x_3, x_5$ are free.
+
+From row 1: $x_2 = 4 - 2x_3 - 3x_5$. From row 2: $x_4 = -1 + 2x_5$.
+
+\[
+\begin{bmatrix} x_1 \\ x_2 \\ x_3 \\ x_4 \\ x_5 \end{bmatrix}
+=
+\begin{bmatrix} x_1 \\ 4 - 2x_3 - 3x_5 \\ x_3 \\ -1 + 2x_5 \\ x_5 \end{bmatrix}
+=
+\begin{bmatrix} 0 \\ 4 \\ 0 \\ -1 \\ 0 \end{bmatrix}
++ x_1 \begin{bmatrix} 1 \\ 0 \\ 0 \\ 0 \\ 0 \end{bmatrix}
++ x_3 \begin{bmatrix} 0 \\ -2 \\ 1 \\ 0 \\ 0 \end{bmatrix}
++ x_5 \begin{bmatrix} 0 \\ -3 \\ 0 \\ 2 \\ 1 \end{bmatrix}
+\]
+
+\bigskip
+
+\textbf{Example:} Given
+\[
+[R \mid d] = \left[ \begin{array}{ccc|c} 1 & 2 & 0 & 3 \\ 0 & 0 & 1 & 2 \end{array} \right]
+\]
+\[
+\begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix}
+=
+\begin{bmatrix} 3 - 2x_2 \\ x_2 \\ 2 \end{bmatrix}
+=
+\begin{bmatrix} 3 \\ 0 \\ 2 \end{bmatrix}
++ x_2 \begin{bmatrix} -2 \\ 1 \\ 0 \end{bmatrix}
+\]
+
+\newpage
+
+\textbf{Interpolating polynomial:}
+
+\medskip
+
+\textbf{Goal:} To write a degree $n$ polynomial $a_n x^n + \cdots + a_1 x + a_0 = p(x)$ through the data points $\begin{bmatrix} x_1 \\ y_1 \end{bmatrix}, \ldots, \begin{bmatrix} x_n \\ y_n \end{bmatrix}$.
+\[
+\begin{cases}
+a_n x_1^n + \cdots + a_1 x_1 + a_0 = y_1 \\
+\qquad \vdots \\
+a_n x_n^n + \cdots + a_1 x_n + a_0 = y_n
+\end{cases}
+\]
+This is a linear system with $n$ equations and unknowns $a_n, \ldots, a_0$.
+
+\medskip
+
+\textbf{Example:} Parabola through 3 points $\begin{bmatrix} 1 \\ 2 \end{bmatrix}, \begin{bmatrix} 2 \\ 0 \end{bmatrix}, \begin{bmatrix} -1 \\ 1 \end{bmatrix}$.
+
+$p(x) = ax^2 + bx + c$
+\begin{align*}
+a(1)^2 + b(1) + c &= 2 \\
+a(2)^2 + b(2) + c &= 0 \\
+a(-1)^2 + b(-1) + c &= 1
+\end{align*}
+
+Let the augmented matrix $= [A \mid b]$.
+\[
+[A \mid b] =
+\left[ \begin{array}{ccc|c} 1 & 1 & 1 & 2 \\ 4 & 2 & 1 & 0 \\ 1 & -1 & 1 & 1 \end{array} \right]
+\to
+\left[ \begin{array}{ccc|c} 1 & 1 & 1 & 2 \\ 0 & -2 & -3 & -8 \\ 0 & -2 & 0 & -1 \end{array} \right]
+\to
+\left[ \begin{array}{ccc|c} 1 & 1 & 1 & 2 \\ 0 & -2 & -3 & -8 \\ 0 & 0 & 3 & 7 \end{array} \right]
+\]
+so $c = \dfrac{7}{3}$; then $-2b - 3 \left( \dfrac{7}{3} \right) = -8 \Rightarrow b = \dfrac{1}{2}$; then $a + \dfrac{1}{2} + \dfrac{7}{3} = 2 \Rightarrow a = -\dfrac{5}{6}$.
+
+\[
+\therefore \quad a = -\frac{5}{6}, \qquad b = \frac{1}{2}, \qquad c = \frac{7}{3}
+\]
+
+\newpage
+
+\textbf{Vectors in $\mathbb{R}^n$:}
+
+\medskip
+
+\textbf{Definition:} $\mathbb{R}^n$ = all matrices $\begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \end{bmatrix}$ where each $x_i$ is a real number.
+
+\medskip
+
+\textbf{Notation:} $\mathbb{R}^1 = \mathbb{R}$.
+
+\medskip
+
+There is a distinction between a point in $\mathbb{R}^n$, denoted $(x_1, x_2, \ldots, x_n)$, and a vector, an arrow from the origin $(0, \ldots, 0)$ to $(x_1, \ldots, x_n)$, denoted $\begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix}$.
+
+\medskip
+
+\textbf{Informal definition:} Vectors are things that can be added and scaled.
+
+\bigskip
+
+\textbf{Definition:} Given vectors $v_1, \ldots, v_n$ and numbers $c_1, \ldots, c_n$, the vector
+\[
+v = c_1 v_1 + \cdots + c_n v_n
+\]
+is a linear combination of $v_1, \ldots, v_n$ with weights $c_1, \ldots, c_n$.
+
+\medskip
+
+\textbf{Definition:} The set of all linear combinations of $v_1, \ldots, v_n$ forms the span $\{v_1, \ldots, v_n\}$, the span of $v_1, \ldots, v_n$.
+
+\medskip
+
+\textbf{Example:} Let $v_1 = \begin{bmatrix} 2 \\ 1 \\ 0 \end{bmatrix}$ and $v_2 = \begin{bmatrix} -1 \\ 1 \\ 0 \end{bmatrix}$. What is $\operatorname{span}\{v_1, v_2\}$? Describe all such $b$.
+\[
+c_1 \begin{bmatrix} 2 \\ 1 \\ 0 \end{bmatrix} + c_2 \begin{bmatrix} -1 \\ 1 \\ 0 \end{bmatrix} = \begin{bmatrix} b_1 \\ b_2 \\ b_3 \end{bmatrix} = b
+\]
+What can we say about $b_3$? $b_3$ is always $0$.
+
+\medskip
+
+So we actually have the system
+\[
+c_1 \begin{bmatrix} 2 \\ 1 \end{bmatrix} + c_2 \begin{bmatrix} -1 \\ 1 \end{bmatrix} = \begin{bmatrix} b_1 \\ b_2 \end{bmatrix}, \qquad
+\begin{cases} 2c_1 - c_2 = b_1 \\ c_1 + c_2 = b_2 \end{cases}
+\]
+Is every $\begin{bmatrix} b_1 \\ b_2 \end{bmatrix}$ realized for some $c_1, c_2$?
+\[
+\begin{bmatrix} 2 & -1 \\ 1 & 1 \end{bmatrix}
+\to
+\begin{bmatrix} 1 & 1 \\ 2 & -1 \end{bmatrix}
+\to
+\begin{bmatrix} 1 & 1 \\ 0 & -3 \end{bmatrix}
+\]
+2 pivots, yes.
+
+\medskip
+
+\textbf{Note:} Since row reduction proceeds from the left, RREF of $[A \mid b]$ looks like $[\operatorname{RREF}(A) \mid \, ? \, ]$. In particular, if $\operatorname{RREF}(A) = \begin{bmatrix} 1 & & 0 \\ & \ddots & \\ 0 & & 1 \end{bmatrix}$, then there is no pivot in the rightmost column of RREF$[A \mid b]$, so $Ax = b$ has a solution.
+
+Thus $\operatorname{span}\{v_1, v_2\} = x_1, x_2\text{-plane}$.
+
+\bigskip
+
+\textbf{Example:} If $v$ is a nonzero vector in $\mathbb{R}^n$, then $\operatorname{span}\{v\}$ = line in the direction of $v$.
+
+\bigskip
+
+\textbf{Example:} If $v = \begin{bmatrix} 0 \\ \vdots \\ 0 \end{bmatrix}$, then $\operatorname{span}\{v\} = \left\{ \begin{bmatrix} 0 \\ \vdots \\ 0 \end{bmatrix} \right\}$.
+
+\newpage
+
+\textbf{Goal:} Write $Ax = b$ as vector equations.
+
+\medskip
+
+\textbf{Definition (matrix-vector product):} Let $A$ be an $m \times n$ matrix ($m$ rows, $n$ columns) with columns $a_1, \ldots, a_n$ in $\mathbb{R}^m$. Let $x = \begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix}$ be a vector in $\mathbb{R}^n$. Then
+\[
+Ax = \begin{bmatrix} a_1 & \cdots & a_n \end{bmatrix} \begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix} = x_1 a_1 + \cdots + x_n a_n
+\]
+= linear combination of $a_1, \ldots, a_n$ with weights $x_1, \ldots, x_n$.
+
+\medskip
+
+\textbf{Note:} $\operatorname{span}\{a_1, \ldots, a_n\} = \{Ax : x \text{ in } \mathbb{R}^n\}$.
+
+\medskip
+
+\textbf{Example:}
+\[
+\begin{bmatrix} 1 & 0 & -1 \\ 0 & 2 & -2 \end{bmatrix}
+\begin{bmatrix} 4 \\ 3 \\ 7 \end{bmatrix}
+= 4 \begin{bmatrix} 1 \\ 0 \end{bmatrix} + 3 \begin{bmatrix} 0 \\ 2 \end{bmatrix} + 7 \begin{bmatrix} -1 \\ -2 \end{bmatrix}
+= \begin{bmatrix} -3 \\ -8 \end{bmatrix}
+\]
+$(2 \times 3)(3 \times 1) = (2 \times 1)$
+
+\medskip
+
+\textbf{Example:} Span of columns of $\begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \end{bmatrix}$ lies in $\mathbb{R}^2$.
+
+Thus $Ax = b$ can be written as a vector equation $x_1 a_1 + \cdots + x_n a_n = b$.
+
+\bigskip
+
+\textbf{Theorem 2:} $Ax = b$ is consistent (has a solution) $\iff$ $b$ is in the span of columns of $A = \begin{bmatrix} a_1 \\ \vdots \\ a_n \end{bmatrix}$.
+
+\newpage
+
+\textbf{Theorem 3:} Let $A$ be an $m \times n$ matrix. The following are equivalent:
+\begin{enumerate}
+\item $A_{m \times n} x = b$ consistent for every $b$.
+\item Columns of $A$ span $\mathbb{R}^m$.
+\item $A$ has a pivot in every row (RREF$(A)$ has $m$ pivots).
+\end{enumerate}
+
+\medskip
+
+\textbf{Proof:}
+
+\bigskip
+
+$1 \iff 2$ from definition.
+
+\bigskip
+
+$3 \Rightarrow 1$: If $A$ has a pivot in every row, then $A_{m \times n} x = b$ is consistent for every $b$.
+
+Wish to know RREF$[A \mid b]$ has no pivot on the rightmost column. Row reduction happens from the left, so RREF of $[A \mid b] = [\operatorname{RREF}(A) \mid d]$ for some $d$. If RREF$(A)$ has a pivot in each row, there can't be a pivot in the $d$-column.
+
+\bigskip
+
+$1 \Rightarrow 3$: $A_{m \times n} x = b$ is consistent for all $b$. Suppose the bottom row of RREF$(A)$ has no pivot; that row is zero:
+\[
+\operatorname{RREF}[A \mid b] = \left[ \begin{array}{ccc|c} * & \cdots & * & d \\ 0 & \cdots & 0 & d \end{array} \right]
+\]
+
+Let $d = \begin{bmatrix} 0 \\ \vdots \\ 1 \end{bmatrix}$. Do the row operations taking $A$ to $R$ in reverse, and apply them to $[R \mid d]$; we get $[A \mid b]$ for some $b$ that depends on $d$. Since $Rx = d$ is inconsistent, $Ax = b$ is inconsistent, contradiction.
+
+\bigskip
+
+\textbf{Example:} Is $Ax = b$ consistent for every $b$?
+\[
+A = \begin{bmatrix} 1 & 2 & 0 \\ -1 & 1 & 2 \end{bmatrix}
+\to
+\begin{bmatrix} 1 & 2 & 0 \\ 0 & 3 & 2 \end{bmatrix}
+\]
+Every row has a pivot, meaning consistent.
+
+\end{document}
