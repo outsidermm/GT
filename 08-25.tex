@@ -1,0 +1,245 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+\textbf{MATH 1564 --- Notes 08/25}
+
+\bigskip
+
+\textbf{Definition:} A linear equation is
+\[
+a_1 x_1 + a_2 x_2 + \cdots + a_n x_n = b
+\]
+where $a_1, a_2, \ldots, a_n$ are coefficients, $a_i \in \mathbb{R}$; $b$ is the right hand side, $b \in \mathbb{R}$; and $x_1, x_2, \ldots, x_n$ are variables (unknowns), $x_i \in \mathbb{R}$.
+
+\medskip
+
+Linear algebra can be done with finite fields, complex numbers. Real number solutions can be better visualized.
+
+\medskip
+
+\textbf{Example:} $2x_1 + 3x_2 = 6$ is a line in $\mathbb{R}^2$.
+
+\bigskip
+
+In general, algebra tends to work even when geometry is hard to understand.
+
+\medskip
+
+\textbf{Example:} $2x_1 + 3x_2 + 0x_3 = b$ is a plane in $\mathbb{R}^3$ with normal vector
+\[
+\begin{bmatrix} 2 \\ 3 \\ 0 \end{bmatrix}.
+\]
+
+\bigskip
+
+We are interested in systems of linear equations. For example,
+\begin{align*}
+2x_1 + 3x_2 + 0x_3 &= 6 \\
+-x_1 + 2x_2 - x_3 &= 2
+\end{align*}
+
+\bigskip
+
+\textbf{Definition:} The system
+\[
+\begin{cases}
+a_{11} x_1 + \cdots + a_{1n} x_n = b_1 \\
+\qquad \vdots \\
+a_{m1} x_1 + \cdots + a_{mn} x_n = b_m
+\end{cases}
+\]
+is a system of $m$ linear equations with unknowns $x_1, \ldots, x_n$.
+
+\bigskip
+
+\textbf{Questions:}
+\begin{enumerate}
+\item How do we describe the solutions of a system?
+\item How many solutions can a system have, and how do we decide this?
+\item Why do we care about linear systems at all? (Taylor expansion: a complex system can be reduced to a linear approximation.)
+\end{enumerate}
+
+\medskip
+
+A linear equation can have no solutions.
+
+\medskip
+
+\textbf{Heuristic on $\mathbb{R}^2$:} For two linear equations, the corresponding lines either intersect, are parallel, or are collinear, so respectively there is 1 solution, no solution, or infinitely many solutions.
+
+\medskip
+
+\textbf{Goal:} Develop an algorithm for solving a linear system that can be made into a computer program.
+
+\bigskip
+
+Note that only the numbers $a_{ij}$, $b_i$ matter, and the indices $i, j$ encode their position, so we write the augmented matrix
+\[
+[A \mid b] =
+\left[
+\begin{array}{ccc|c}
+a_{11} & \cdots & a_{1n} & b_1 \\
+& \vdots & & \vdots \\
+a_{m1} & \cdots & a_{mn} & b_m
+\end{array}
+\right].
+\]
+
+The matrix encodes the system. $A$ is the matrix of coefficients, and $b$ is the right hand side of the system.
+
+\medskip
+
+\textbf{Strategy:} Do row operations on $[A \mid b]$ to bring it to a simpler form.
+
+\medskip
+
+We write the system as $Ax = b$ where $x = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \end{bmatrix}$.
+
+\bigskip
+
+\textbf{Elementary row operations:}
+\begin{enumerate}
+\item \textbf{Replacement:} add a multiple of a row to another row.
+\item \textbf{Interchange:} swap two rows.
+\item \textbf{Scaling:} multiply a row by a nonzero number.
+\end{enumerate}
+
+\medskip
+
+\textbf{Key feature:} Each row operation is reversible, so no information is lost.
+
+\newpage
+
+\textbf{Theorem 1:} If $[R \mid d]$ is obtained from $[A \mid b]$ by a sequence of row operations, then $Ax = b \iff Rx = d$.
+
+\medskip
+
+\textbf{Proof:} Argue by induction on $r$ = the number of operations.
+
+\bigskip
+
+Base case: $r = 0$.
+
+\bigskip
+
+Inductive step $r \to r+1$: both sides apply the operation. Cases:
+\begin{enumerate}
+\item Replacement
+\item Interchange
+\item Scaling
+\end{enumerate}
+
+\newpage
+
+\textbf{How to simplify $[A \mid b]$ by row reduction:} Aim toward RREF = row reduced echelon form.
+
+\medskip
+
+\textbf{Example:} A matrix in RREF looks like (where $*$ = any number):
+\[
+\begin{bmatrix}
+0 & 1 & * & 0 & * & 0 & 0 & * \\
+0 & 0 & 0 & 1 & * & 0 & 0 & * \\
+0 & 0 & 0 & 0 & 0 & 1 & 0 & * \\
+0 & 0 & 0 & 0 & 0 & 0 & 1 & * \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0
+\end{bmatrix}
+\]
+
+\medskip
+
+\textbf{Definition:} A matrix is in RREF if:
+\begin{enumerate}
+\item All zero rows (if any) are at the bottom.
+\item The leftmost nonzero entry in a row equals 1 (called a pivot) and is to the right of the pivots in the rows above.
+\item Pivots are the only nonzero entries in their columns.
+\end{enumerate}
+
+\medskip
+
+\textbf{Examples:} Is each matrix in RREF?
+\[
+\begin{bmatrix} 1 & 1 \\ 0 & 1 \end{bmatrix} \; \text{No.} \qquad
+\begin{bmatrix} 0 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix} \; \text{No.} \qquad
+\begin{bmatrix} 1 & 2 & 0 \\ 0 & 0 & 0 \end{bmatrix} \; \text{Yes.}
+\]
+
+\medskip
+
+Pivotal position, pivot.
+
+\newpage
+
+\textbf{Row reduction algorithm:}
+\begin{enumerate}
+\item Cover zero columns on the left.
+\item Look at the leftmost nonzero column. Pick a nonzero entry in the column.
+\begin{enumerate}
+\item Move it to the top row.
+\item Scale it to be 1.
+\item Use row replacement to make all other entries in the column $= 0$.
+\end{enumerate}
+\item Cover the column and the top row to get a smaller matrix, and repeat the process.
+\end{enumerate}
+
+\medskip
+
+\textbf{Example:}
+\[
+\begin{bmatrix} 2 & 4 & 6 \\ -1 & -2 & -1 \end{bmatrix}
+\to
+\begin{bmatrix} 1 & 2 & 1 \\ 2 & 4 & 6 \end{bmatrix}
+\to
+\begin{bmatrix} 1 & 2 & 1 \\ 0 & 0 & 4 \end{bmatrix}
+\to
+\begin{bmatrix} 1 & 2 & 1 \\ 0 & 0 & 1 \end{bmatrix}
+\to
+\begin{bmatrix} 1 & 2 & 0 \\ 0 & 0 & 1 \end{bmatrix} \; (\text{RREF})
+\]
+
+Alternatively, using different row operations on the same starting matrix:
+\[
+\begin{bmatrix} 2 & 4 & 6 \\ -1 & -2 & -1 \end{bmatrix}
+\to
+\begin{bmatrix} 1 & 2 & 3 \\ -1 & -2 & -1 \end{bmatrix}
+\to
+\begin{bmatrix} 1 & 2 & 3 \\ 0 & 0 & 2 \end{bmatrix}
+\to
+\begin{bmatrix} 1 & 2 & 3 \\ 0 & 0 & 1 \end{bmatrix}
+\to
+\begin{bmatrix} 1 & 2 & 0 \\ 0 & 0 & 1 \end{bmatrix} \; (\text{RREF})
+\]
+
+\newpage
+
+\textbf{Example:} Given
+\[
+[R \mid d] = \left[ \begin{array}{ccc|c} 1 & 2 & 0 & 3 \\ 0 & 0 & 1 & 2 \end{array} \right]
+\]
+this encodes
+\begin{align*}
+x_1 + 2x_2 + 0x_3 &= 3 \\
+0x_1 + 0x_2 + 1x_3 &= 2
+\end{align*}
+so $x_3 = 2$ and $x_1 + 2x_2 = 3$, i.e., $x_1 = 3 - 2x_2$.
+
+$x_1$ and $x_3$ are \textbf{pivotal variables}; $x_2$ is \textbf{free} (the opposite of a pivotal variable).
+
+\medskip
+
+\textbf{Solution:}
+\[
+\begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix}
+=
+\begin{bmatrix} 3 - 2x_2 \\ x_2 \\ 2 \end{bmatrix}
+=
+\begin{bmatrix} 3 \\ 0 \\ 2 \end{bmatrix}
++ x_2 \begin{bmatrix} -2 \\ 1 \\ 0 \end{bmatrix}
+\]
+
+This is a line in $\mathbb{R}^3$ passing through $\begin{bmatrix} 3 \\ 0 \\ 2 \end{bmatrix}$ in the direction of $\begin{bmatrix} -2 \\ 1 \\ 0 \end{bmatrix}$.
+
+\end{document}
