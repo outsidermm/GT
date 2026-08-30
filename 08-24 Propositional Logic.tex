@@ -1,0 +1,160 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+\textbf{Notes 08/24 (Propositional Logic)}
+
+\bigskip
+
+\textbf{Proposition:}
+
+\medskip
+
+Statements that are either true or false.
+
+\medskip
+
+Questions are not propositions. Demands are not propositions.
+
+\bigskip
+
+\textbf{Example:}
+
+\medskip
+
+$x + y = 3$ and $x = 7$ are \emph{not} propositions --- they are ambiguous, since we don't know what $x, y$ are.
+
+\medskip
+
+Propositional variables denote propositions.
+
+\bigskip
+
+\textbf{Negation.} $\lnot p \equiv$ not $p$.
+
+\medskip
+
+\textbf{Truth table:}
+\begin{center}
+\begin{tabular}{c|c}
+$p$ & $\lnot p$ \\
+\hline
+T & F \\
+F & T
+\end{tabular}
+\end{center}
+
+\bigskip
+
+\textbf{Conjunction} of $p$ and $q$: $p \land q$ (and).
+
+\smallskip
+
+\textbf{Disjunction} of $p$ and $q$: $p \lor q$ (or).
+
+\smallskip
+
+\textbf{Exclusive or (XOR):} $p \oplus q \equiv (p \lor q) \land \lnot (p \land q)$.
+
+\medskip
+
+\begin{center}
+\begin{tabular}{ccccc}
+$p$ & $q$ & $p \oplus q$ & $p \lor q$ & $p \land q$ \\
+\hline
+T & T & F & T & T \\
+T & F & T & T & F \\
+F & T & T & T & F \\
+F & F & F & F & F
+\end{tabular}
+\end{center}
+
+\bigskip
+
+\textbf{Conditional statement:} 
+
+\smallskip
+$p \to q$.
+
+\smallskip
+
+$p$ is the \textbf{sufficient condition / hypothesis}; $q$ is the \textbf{conclusion} or the \textbf{necessary condition}.
+
+\medskip
+
+\[
+\lnot (p \to q) \equiv p \land \lnot q, \qquad p \to q \equiv \lnot p \lor q.
+\]
+
+\medskip
+
+\textbf{Truth table:}
+\begin{center}
+\begin{tabular}{cc|c}
+$p$ & $q$ & $p \to q$ \\
+\hline
+T & T & T \\
+T & F & F \\
+F & T & T \\
+F & F & T
+\end{tabular}
+\end{center}
+
+\medskip
+
+\textbf{Equivalent phrasings of $p \to q$:}
+\begin{enumerate}
+\item If $p$, then $q$.
+\item If $p$, $q$.
+\item $p$ is sufficient for $q$.
+\item $q$ if $p$.
+\item $q$ when $p$.
+\item A necessary condition for $p$ is $q$.
+\item $q$ unless $\lnot p$.
+\item $p$ implies $q$.
+\item $p$ only if $q$.
+\item a sufficient condition for $q$ is $p$.
+\item $q$ whenever $p$.
+\item $q$ is necessary for $p$.
+\item $q$ follows from $p$.
+\item $q$ provided that $p$.
+\end{enumerate}
+
+\bigskip
+
+\textbf{Related conditionals.} Given $p \to q$:
+\begin{itemize}
+\item \textbf{Converse:} $q \to p$
+\item \textbf{Inverse:} $\lnot p \to \lnot q$
+\item \textbf{Contrapositive:} $\lnot q \to \lnot p$
+\end{itemize}
+
+\bigskip
+
+\textbf{Biconditionals} --- ``if and only if'', abbreviated ``iff''.
+
+\[
+p \leftrightarrow q
+\]
+
+\medskip
+
+\textbf{Truth table:}
+\begin{center}
+\begin{tabular}{cc|c}
+$p$ & $q$ & $p \leftrightarrow q$ \\
+\hline
+T & T & T \\
+T & F & F \\
+F & T & F \\
+F & F & T
+\end{tabular}
+\end{center}
+
+\medskip
+
+$p$ is a sufficient condition for $q$ to happen, and $q$ is a sufficient condition for $p$ to happen.
+
+\end{document}
