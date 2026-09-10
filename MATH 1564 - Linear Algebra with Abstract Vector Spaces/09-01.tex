@@ -1,0 +1,219 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+\textbf{MATH 1564 --- Notes 09/01}
+
+\bigskip
+
+\textbf{Homogeneous systems}
+
+\medskip
+
+\textbf{Definition:} $Ax = 0$ is called homogeneous.
+
+\medskip
+
+\textbf{Key property:} For any number $c$, if $Ax = 0$, then $A(cx) = 0$.
+
+\medskip
+
+\textbf{Why?} Write $A = [a_1 \; \cdots \; a_n]$ and $x = \begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix}$. Then
+\[
+A(cx) = cx_1 a_1 + \cdots + cx_n a_n = c(x_1 a_1 + \cdots + x_n a_n) = cAx = c0 = 0.
+\]
+
+\medskip
+
+\textbf{Example:} $Ax = 0$ always has the obvious solution $x = \begin{bmatrix} 0 \\ \vdots \\ 0 \end{bmatrix}$.
+
+\newpage
+
+\textbf{Theorem 1:} The following are equivalent:
+\begin{enumerate}
+\item $Ax = 0$ has a nonzero solution.
+\item $Ax = 0$ has infinitely many solutions.
+\item There is a free variable.
+\item $A$ has a column with no pivot.
+\end{enumerate}
+
+\bigskip
+
+\textbf{Convention:} Since columns do not move under row operations, we say a column of $A$ is \textbf{pivotal} if the same column in $\mathrm{RREF}(A)$ has a pivot.
+
+\bigskip
+
+$2 \iff 3$: trivial.
+
+\medskip
+
+$1 \Rightarrow 2$: If $x$ is a nonzero solution of $Ax = 0$, then $cx$ is also a solution for any number $c$, and these are all distinct since $x \neq 0$ --- so there are infinitely many solutions.
+
+\medskip
+
+\textbf{Example:}
+\[
+A = \begin{bmatrix} 1 & 2 \\ 3 & 6 \end{bmatrix} \to \begin{bmatrix} 1 & 2 \\ 0 & 0 \end{bmatrix}
+\]
+No pivot in column 2. A nonzero solution of $Ax = 0$ is $x = \begin{bmatrix} 2 \\ -1 \end{bmatrix}$, so there are infinitely many solutions.
+
+\newpage
+
+\textbf{Linear dependence}
+
+\medskip
+
+\textbf{Motivation:} If $v_1, \ldots, v_k$ are vectors in $\mathbb{R}^m$, how do we describe $\mathrm{span}\{v_1, \ldots, v_k\}$ with the least amount of data?
+
+\bigskip
+
+\textbf{Definition:} Vectors $\{v_1, \ldots, v_k\}$ in $\mathbb{R}^m$ are \textbf{linearly independent} if the vector equation $c_1 v_1 + \cdots + c_k v_k = 0$ with unknowns $c_1, \ldots, c_k$ only has the zero solution
+\[
+\begin{bmatrix} c_1 \\ \vdots \\ c_k \end{bmatrix} = \begin{bmatrix} 0 \\ \vdots \\ 0 \end{bmatrix}.
+\]
+
+\medskip
+
+\textbf{Definition:} Vectors $\{v_1, \ldots, v_k\}$ are \textbf{dependent} if they are not independent.
+
+\bigskip
+
+\textbf{Theorem 2:} $\{v_1, \ldots, v_k\}$ is dependent $\iff$ for some $i = 1, \ldots, k$, $v_i$ is a linear combination of $v_1, \ldots, v_{i-1}, v_{i+1}, \ldots, v_k$.
+
+\medskip
+
+\textbf{Proof:} We have $c_1 v_1 + \cdots + c_k v_k = 0$ for some $c_i \neq 0$. Solve for $v_i$:
+\[
+v_i = -\frac{1}{c_i}\left(c_1 v_1 + \cdots + c_{i-1} v_{i-1} + c_{i+1} v_{i+1} + \cdots + c_k v_k\right).
+\]
+Conversely, if $v_i$ equals such a combination, moving it to the other side gives a nontrivial relation $c_1 v_1 + \cdots + c_k v_k = 0$.
+
+\medskip
+
+\textbf{Example:} Find all $h$ such that the columns of $\begin{bmatrix} 1 & 2 \\ 3 & h \end{bmatrix}$ are dependent.
+
+\medskip
+
+$h = 6$: $\begin{bmatrix} 2 \\ 6 \end{bmatrix} = 2 \begin{bmatrix} 1 \\ 3 \end{bmatrix}$.
+
+\newpage
+
+\textbf{Note:} $\{v_1, v_2\}$ is dependent $\iff$ $v_1 = cv_2$ or $v_2 = cv_1$ for some $c$.
+
+\bigskip
+
+\textbf{Example:} Pivotal columns of a RREF matrix are independent.
+\[
+\begin{bmatrix} 1 & 2 & 0 & 3 & 0 & 1 \\ 0 & 0 & 1 & -1 & 0 & -1 \\ 0 & 0 & 0 & 0 & 1 & 1 \end{bmatrix}
+\]
+\[
+\begin{bmatrix} c_1 \\ c_2 \\ c_3 \end{bmatrix}
+= c_1 \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix} + c_2 \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix} + c_3 \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix}
+\]
+
+\bigskip
+
+\textbf{Example:} If some $v_i = 0$, then $v_1, \ldots, v_k$ is dependent.
+
+\medskip
+
+Take $i = 1$: $1 \cdot v_1 + 0 \cdot v_2 + \cdots + 0 \cdot v_k = 0$ is a nontrivial relation.
+
+\bigskip
+
+\textbf{Theorem 3:} Let $A = [v_1 \; \cdots \; v_n]$ be an $m \times n$ matrix, where $v_i$ is column $i$ of $A$. Then
+\[
+\{v_1, \ldots, v_n\} \text{ is independent} \iff \text{each column of } A \text{ is pivotal (RREF has } n \text{ pivots)}.
+\]
+
+\medskip
+
+\textbf{Proof:} $c_1 v_1 + \cdots + c_n v_n = 0 \iff A \begin{bmatrix} c_1 \\ \vdots \\ c_n \end{bmatrix} = 0$.
+
+\newpage
+
+A homogeneous system has only the zero solution $\iff$ each column of $A$ is pivotal.
+
+\bigskip
+
+\textbf{More general.}
+
+\medskip
+
+\textbf{Theorem 4:} The pivotal columns of any matrix are independent.
+
+\medskip
+
+\textbf{Proof:} Suppose $A = [v_1 \; \cdots \; v_n]$ and $v_{i_1}, \ldots, v_{i_k}$ are the pivotal columns.
+
+\medskip
+
+Let $c = \begin{bmatrix} c_1 \\ \vdots \\ c_n \end{bmatrix}$ with $c_i = 0$ if $i$ is not among $i_1, \ldots, i_k$.
+
+\medskip
+
+Suppose $Ac = c_{i_1} v_{i_1} + \cdots + c_{i_k} v_{i_k} = 0$; we show $c = 0$.
+
+\medskip
+
+Now $Ac = 0 \iff Rc = 0$, where $\mathrm{RREF}(A) = R = [r_1 \; \cdots \; r_n]$. So
+\[
+0 = Rc = c_1 r_1 + \cdots + c_n r_n = c_{i_1} r_{i_1} + \cdots + c_{i_k} r_{i_k}.
+\]
+Since $A$ has $k$ pivots and $r_{i_1}, \ldots, r_{i_k}$ are exactly the pivot columns of $R$, they are the standard basis vectors of $\mathbb{R}^k$ (in their nonzero rows), so this equation forces $c_{i_1} = \cdots = c_{i_k} = 0$ by matching components, i.e., $c = 0$. Hence $\{v_{i_1}, \ldots, v_{i_k}\}$ is independent.
+
+\bigskip
+
+\textbf{Conclusion:} To test if vectors are independent, put them as columns in a matrix and check if all columns are pivotal.
+
+\newpage
+
+\textbf{Example:} Find all $h$ such that $\begin{bmatrix} 1 \\ 1 \\ h \end{bmatrix}$, $\begin{bmatrix} 1 \\ h \\ 1 \end{bmatrix}$, $\begin{bmatrix} h \\ 1 \\ 1 \end{bmatrix}$ are independent.
+
+\[
+\begin{bmatrix} 1 & 1 & h \\ 1 & h & 1 \\ h & 1 & 1 \end{bmatrix}
+\equiv
+\begin{bmatrix} 1 & 1 & h \\ 0 & h-1 & 1-h \\ 0 & 1-h & 1-h^2 \end{bmatrix}
+\equiv
+\begin{bmatrix} 1 & 1 & h \\ 0 & h-1 & 1-h \\ 0 & 0 & 2-h-h^2 \end{bmatrix}
+\]
+
+\medskip
+
+Need $h - 1 \neq 0$ and $2 - h - h^2 \neq 0$ (if either $= 0$, the columns are dependent).
+\[
+2 - h - h^2 = -(h-1)(h+2) = 0 \iff h = 1 \text{ or } h = -2.
+\]
+So we need $h \neq 1$ and $h \neq -2$.
+
+\medskip
+
+In that case the matrix reduces to $\begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}$, so the vectors are independent.
+
+\bigskip
+
+\textbf{Example:} If $v$ is in $\mathbb{R}^n$, is $\{v\}$ dependent?
+
+\medskip
+
+$cv = 0 \Rightarrow c = 0$ is true $\iff v \neq 0$. So $\{v\}$ is independent iff $v \neq 0$.
+
+\newpage
+
+\textbf{Theorem 5:} If $v_1, \ldots, v_k$ are in $\mathbb{R}^n$ and $k > n$, then $\{v_1, \ldots, v_k\}$ is dependent.
+
+\medskip
+
+\textbf{Proof:} Let $A = [v_1 \; \cdots \; v_k]$, an $n \times k$ matrix. Suppose all columns are pivotal; then there are $k$ pivots. But there are only $n$ rows and each pivot lies in its own row, so the number of pivots is at most $n$. Since $k > n$, this is a contradiction, so the columns are not all pivotal. Therefore $\{v_1, \ldots, v_k\}$ is dependent.
+
+\bigskip
+
+\textbf{Example:} Suppose $v_1, v_2, v_3$ are in $\mathbb{R}^2$:
+\[
+v_1 = \begin{bmatrix} 1 \\ 0 \end{bmatrix}, \quad v_2 = \begin{bmatrix} 0 \\ 1 \end{bmatrix}, \quad v_3 = \begin{bmatrix} 1 \\ 1 \end{bmatrix}, \quad v_1 + v_2 = v_3.
+\]
+$\{v_1, v_2\}$, $\{v_1, v_3\}$, $\{v_2, v_3\}$ are each independent, but $\{v_1, v_2, v_3\}$ is not independent (by Theorem 5, since $k = 3 > 2 = n$).
+
+\end{document}
