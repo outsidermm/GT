@@ -1,0 +1,294 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+\textbf{MATH 1564 --- Notes 09/08}
+
+\bigskip
+
+\textbf{Matrices} \hfill \textbf{Linear maps}
+
+\medskip
+
+$A = [T(e_1) \; \cdots \; T(e_n)]$ \hfill $T(x) = Ax$
+
+\medskip
+
+$A$ has $n$ columns \hfill Domain of $T = \mathbb{R}^n$
+
+\medskip
+
+$A$ has $m$ rows \hfill Codomain of $T = \mathbb{R}^m$
+
+\bigskip
+
+$Ax = b$ \hfill $T(x) = b$
+
+\medskip
+
+$\mathrm{span}\{T(e_1), \ldots, T(e_n)\}$
+
+$= \mathrm{span}\{\text{columns of } A\}$ \hfill Image of $T$
+
+$= \{Ax : x \text{ in } \mathbb{R}^n\}$
+
+$= \{T(x) : x \text{ in } \mathbb{R}^n\}$
+
+\bigskip
+
+$A$ has a pivot in each row \hfill onto
+
+$A$ has a pivot in each column \hfill one-to-one
+
+\newpage
+
+\textbf{Theorem 1:} The composition of linear maps is linear.
+
+\medskip
+
+\textbf{Proof:} $\mathbb{R}^n \xrightarrow{T} \mathbb{R}^m \xrightarrow{S} \mathbb{R}^k$.
+
+\medskip
+
+A map $f$ is linear $\iff$ $f(c_1v_1 + c_2v_2) = c_1f(v_1) + c_2f(v_2)$.
+
+\medskip
+
+$T$ is linear:
+\begin{align*}
+S(T(c_1v_1 + c_2v_2)) &= S(c_1T(v_1) + c_2T(v_2)) \\
+&= c_1 S(T(v_1)) + c_2 S(T(v_2)).
+\end{align*}
+
+\bigskip
+
+Let $A, B$ be matrices with $T(x) = Ax$ and $S(y) = By$. What are the sizes of $A, B$?
+\[
+\mathbb{R}^n \xrightarrow{T} \mathbb{R}^m \xrightarrow{S} \mathbb{R}^k
+\]
+\[
+A: \; m \times n, \qquad B: \; k \times m.
+\]
+
+\bigskip
+
+\textbf{Definition:} Product of matrices. The product $BA$ is the standard matrix of $S \circ T$.
+
+\medskip
+
+What is the size of $BA$? $\quad k \times n$.
+
+\medskip
+
+Does $AB$ make sense? Yes if $k = n$. No if $k \neq n$.
+
+\newpage
+
+What is the standard matrix of the map $T(x) = x$ for all $x$?
+\[
+T(x) = Ax = \begin{bmatrix} 1 & & 0 \\ & \ddots & \\ 0 & & 1 \end{bmatrix} \begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix}.
+\]
+
+\bigskip
+
+\textbf{Example:} $\underset{m \times n}{A} I_n = A$, since $S \circ T = S$ when $T(x) = x$.
+
+\bigskip
+
+\textbf{Example:} $I_m \underset{m \times n}{A} = A$. \quad ($I_1 = [1]$.)
+
+\bigskip
+
+\textbf{Example:} Is $A(BC) = (AB)C$? (Associativity.)
+\[
+S \circ R \circ T = S(R(T(x))). \qquad \text{Yes.}
+\]
+
+\bigskip
+
+\textbf{Example:} Is $AB = BA$? \quad Not commutative.
+
+\newpage
+
+\textbf{Formula for product of matrices}
+
+\medskip
+
+\textbf{Theorem 2:} If $\underset{m \times n}{A} = [a_1 \; \cdots \; a_n]$ and $B$ is $k \times m$, then $BA = [Ba_1 \; \cdots \; Ba_n]$.
+
+\medskip
+
+\textbf{Example:}
+\[
+\begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix} \begin{bmatrix} 5 & 0 \\ 4 & 2 \end{bmatrix} = \begin{bmatrix} 13 & 4 \\ 31 & 8 \end{bmatrix}.
+\]
+
+\bigskip
+
+\textbf{Proof:} The standard matrix for $S \circ T$ is
+\[
+[S(T(e_1)) \; \cdots \; S(T(e_n))] = [BT(e_1) \; \cdots \; BT(e_n)],
+\]
+where $S(y) = By$, $T(x) = Ax$.
+The matrix for $T$ is $[T(e_1) \; \cdots \; T(e_n)] = A$, with $T(e_1) = a_1, \ldots, T(e_n) = a_n$.
+
+\bigskip
+
+\textbf{Notation:} $a_{ij}$ = entry of $A$ at row $i$, column $j$.
+
+\medskip
+
+\textbf{Example:} $A = \begin{bmatrix} 1 & -1 & 0 \\ 7 & 3 & -2 \end{bmatrix}$
+\[
+a_{23} = -2, \qquad a_{12} = -1, \qquad a_{31} = \text{undefined}.
+\]
+
+\newpage
+
+\textbf{Theorem 3:} If $A = (a_{ij})$ is $m \times n$ and $B = (b_{ij})$ is $n \times k$, then the $ij$ entry of $AB$ is
+\[
+a_{i1}b_{1j} + \cdots + a_{in}b_{nj}.
+\]
+
+\medskip
+
+\textbf{Proof:} The $j$th column of $AB$ is
+\[
+A \begin{bmatrix} b_{1j} \\ \vdots \\ b_{nj} \end{bmatrix}
+= b_{1j} \begin{bmatrix} a_{11} \\ \vdots \\ a_{m1} \end{bmatrix} + \cdots + b_{nj} \begin{bmatrix} a_{1n} \\ \vdots \\ a_{mn} \end{bmatrix}.
+\]
+
+\bigskip
+
+\textbf{Example:} The $21$ entry of
+\[
+\begin{bmatrix} 1 & 2 \\ 3 & -1 \end{bmatrix} \begin{bmatrix} -1 & 0 \\ 1 & 3 \end{bmatrix} = \begin{bmatrix} 1 & 6 \\ -4 & -3 \end{bmatrix}
+\]
+is $\boxed{-4}$.
+
+\bigskip
+
+\textbf{Example:} If $A, B$ are $n \times n$ matrices, do we expect $AB = BA$?
+\[
+\begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix} \begin{bmatrix} 0 & 1 \\ 0 & 0 \end{bmatrix} = \begin{bmatrix} 0 & 1 \\ 0 & 0 \end{bmatrix},
+\qquad
+\begin{bmatrix} 0 & 1 \\ 0 & 0 \end{bmatrix} \begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix} = \begin{bmatrix} 0 & 0 \\ 0 & 0 \end{bmatrix}.
+\qquad \text{No.}
+\]
+
+\newpage
+
+If $AB = 0$, we can't expect $A = 0$ or $B = 0$.
+
+\medskip
+
+If $AB = AC$, $A \neq 0$, we can't expect $B = C$.
+
+\medskip
+
+\[
+A = \begin{bmatrix} 0 & 1 \\ 0 & 0 \end{bmatrix}: \qquad
+\begin{bmatrix} 0 & 1 \\ 0 & 0 \end{bmatrix} \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix} = \begin{bmatrix} 3 & 4 \\ 0 & 0 \end{bmatrix},
+\qquad
+\begin{bmatrix} 0 & 1 \\ 0 & 0 \end{bmatrix} \begin{bmatrix} 5 & 6 \\ 3 & 4 \end{bmatrix} = \begin{bmatrix} 3 & 4 \\ 0 & 0 \end{bmatrix}.
+\]
+
+\bigskip
+
+\textbf{Example:}
+\[
+\begin{bmatrix} 0 & 1 \\ 0 & 0 \end{bmatrix} \begin{bmatrix} 0 & 1 \\ 0 & 0 \end{bmatrix} = \begin{bmatrix} 0 & 0 \\ 0 & 0 \end{bmatrix}.
+\]
+
+\bigskip
+
+\textbf{Example (powers).} $A = \begin{bmatrix} 2 & 0 \\ 0 & -1 \end{bmatrix}$ (a \textbf{diagonal matrix}):
+\[
+A^2 = \begin{bmatrix} 2 & 0 \\ 0 & -1 \end{bmatrix} \begin{bmatrix} 2 & 0 \\ 0 & -1 \end{bmatrix} = \begin{bmatrix} 2^2 & 0 \\ 0 & (-1)^2 \end{bmatrix} = \begin{bmatrix} 4 & 0 \\ 0 & 1 \end{bmatrix}.
+\]
+
+\newpage
+
+\textbf{Theorem 4:} $A^n = \begin{bmatrix} 2^n & 0 \\ 0 & (-1)^n \end{bmatrix}$.
+
+\medskip
+
+\textbf{Proof (induction):} $n = 1$: true.
+
+\medskip
+
+\textbf{Hypothesis:} $A^{n-1} = \begin{bmatrix} 2^{n-1} & 0 \\ 0 & (-1)^{n-1} \end{bmatrix}$.
+
+\medskip
+
+\textbf{Prove:}
+\[
+A^n = A^{n-1}A = \begin{bmatrix} 2^{n-1} & 0 \\ 0 & (-1)^{n-1} \end{bmatrix} \begin{bmatrix} 2 & 0 \\ 0 & -1 \end{bmatrix} = \begin{bmatrix} 2^n & 0 \\ 0 & (-1)^n \end{bmatrix}.
+\]
+
+\bigskip
+
+Similarly, for $k > 0$:
+\[
+\begin{bmatrix} d_1 & & 0 \\ & \ddots & \\ 0 & & d_n \end{bmatrix}^k = \begin{bmatrix} d_1^k & & 0 \\ & \ddots & \\ 0 & & d_n^k \end{bmatrix}.
+\]
+
+\bigskip
+
+\textbf{Example:} $\begin{bmatrix} \pm 1 & 0 \\ 0 & \pm 1 \end{bmatrix}^2 = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}$.
+
+\newpage
+
+\textbf{Scaling matrices.}
+\[
+c \begin{bmatrix} a_{11} & \cdots & a_{1n} \\ \vdots & \ddots & \vdots \\ a_{m1} & \cdots & a_{mn} \end{bmatrix}
+= \begin{bmatrix} ca_{11} & \cdots & ca_{1n} \\ \vdots & \ddots & \vdots \\ ca_{m1} & \cdots & ca_{mn} \end{bmatrix}.
+\]
+
+\medskip
+
+\textbf{Example:} $2 \begin{bmatrix} 1 & 3 \\ -1 & 5 \end{bmatrix} = \begin{bmatrix} 2 & 6 \\ -2 & 10 \end{bmatrix}$.
+
+\bigskip
+
+\textbf{Adding matrices of the same size.}
+\[
+\begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix} + \begin{bmatrix} -1 & 5 \\ 0 & 6 \end{bmatrix} = \begin{bmatrix} 1-1 & 2+5 \\ 3+0 & 4+6 \end{bmatrix} = \begin{bmatrix} 0 & 7 \\ 3 & 10 \end{bmatrix}.
+\]
+
+\medskip
+
+Recall vectors can be scaled and added; matrices of the same size can be thought of the same way.
+
+\newpage
+
+\textbf{Properties.} For matrices $A, B, C$ of compatible sizes and scalars $r, s$:
+\begin{align*}
+A + 0 &= 0 + A = A \\
+(A+B)+C &= A+(B+C) \\
+r(A+B) &= rA+rB \\
+(r+s)A &= rA+sA \\
+(rs)A &= r(sA) \\
+A(B+C) &= AB+AC \\
+(A+B)C &= AC+BC
+\end{align*}
+
+\bigskip
+
+\textbf{Example:} For $A, B$ both $n \times n$:
+\[
+(A+B)^2 = (A+B)(A+B) = A^2 + AB + BA + B^2.
+\]
+
+\bigskip
+
+\textbf{Example:}
+\[
+(A+B)(A-B) = A^2 - AB + BA - B^2.
+\]
+
+(Note: since $AB \neq BA$ in general, these do \emph{not} simplify to $A^2+2AB+B^2$ or $A^2-B^2$ as they would for numbers.)
+
+\end{document}
