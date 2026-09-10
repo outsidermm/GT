@@ -1,0 +1,147 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb}
+\setlength{\parindent}{0pt}
+\renewcommand{\arraystretch}{1.35}
+
+\begin{document}
+
+\textbf{CS 2050 --- Notes 09/09}
+
+\bigskip
+
+\textbf{Definitions}
+
+\medskip
+
+\textbf{Argument} --- a set of initial statements, called premises, followed by a conclusion.
+
+\medskip
+
+An argument is valid if and only if, in every case in which the premises are true, the conclusion is true. Otherwise, the argument is invalid.
+
+\medskip
+
+An argument can be valid if the conclusion is false. This can occur when a premise is false.
+
+\bigskip
+
+\textbf{Modus Ponens}
+
+\medskip
+
+If a conditional statement is true and the hypothesis of the conditional is true, the conclusion of the conditional statement is true.
+
+\medskip
+
+\begin{center}
+\begin{tabular}{cc|c|c}
+$p$ & $q$ & $p \to q$ & $\bigl(p \land (p \to q)\bigr) \to q$ \\
+\hline
+F & F & T & T \\
+F & T & T & T \\
+T & F & F & T \\
+T & T & T & T
+\end{tabular}
+\end{center}
+
+\bigskip
+
+\textbf{Rules of Inference}
+
+\medskip
+
+\begin{center}
+\begin{tabular}{@{}p{0.44\textwidth}l@{}}
+$\displaystyle \frac{\begin{gathered}p\\p \to q\end{gathered}}{\therefore\ q}$ & \textbf{Modus Ponens} \\[1.3em]
+$\displaystyle \frac{\begin{gathered}\lnot q\\p \to q\end{gathered}}{\therefore\ \lnot p}$ & \textbf{Modus Tollens} \\[1.3em]
+$\displaystyle \frac{p}{\therefore\ p \lor q}$ & \textbf{Addition} \\[1.3em]
+$\displaystyle \frac{p \land q}{\therefore\ p}$ & \textbf{Simplification}
+\end{tabular}
+\end{center}
+
+\newpage
+
+\textbf{Rules of Inference (continued)}
+
+\medskip
+
+\begin{center}
+\begin{tabular}{@{}p{0.44\textwidth}l@{}}
+$\displaystyle \frac{\begin{gathered}p \qquad q\end{gathered}}{\therefore\ p \land q}$ & \textbf{Conjunction} \\[1.3em]
+$\displaystyle \frac{\begin{gathered}p \to q\\q \to r\end{gathered}}{\therefore\ p \to r}$ & \textbf{Hypothetical Syllogism} \\[1.3em]
+$\displaystyle \frac{\begin{gathered}p \lor q\\\lnot p\end{gathered}}{\therefore\ q}$ & \textbf{Disjunctive Syllogism} \\[1.3em]
+$\displaystyle \frac{\begin{gathered}p \lor q\\\lnot p \lor r\end{gathered}}{\therefore\ q \lor r}$ & \textbf{Resolution}
+\end{tabular}
+\end{center}
+
+\bigskip
+
+\textbf{Fallacy.} A fallacy resembles a rule of inference, but is based on contingencies instead of tautologies.
+
+\medskip
+
+Example: $\bigl((p \to q) \land q\bigr) \to p$.
+
+\medskip
+
+\begin{center}
+\begin{tabular}{cc|c}
+$p$ & $q$ & $\bigl((p \to q) \land q\bigr) \to p$ \\
+\hline
+F & F & T \\
+F & T & F \\
+T & F & T \\
+T & T & T
+\end{tabular}
+\end{center}
+
+\newpage
+
+\bigskip
+
+\textbf{Rules of Inference for Quantified Statements}
+
+\medskip
+
+\textbf{Universal Instantiation}
+
+\medskip
+
+For example, from the statement ``All clerics are wise,'' we can conclude that ``Kristen is wise'' when Kristen is a member of the domain of all clerics.
+
+\medskip
+
+\textbf{Universal Generalization}
+
+\medskip
+
+To show that $\forall x\,P(x)$ is true, take an arbitrary element $c$ from the domain and show that $P(c)$ is true. The element $c$ must be arbitrary.
+
+\medskip
+
+\textbf{Existential Instantiation}
+
+\medskip
+
+Existential instantiation is the rule that allows us to conclude that there is an element $c$ in the domain for which $P(c)$ is true if we know that $\exists x\,P(x)$ is true.
+
+\medskip
+
+\textbf{Existential Generalization}
+
+\medskip
+
+Existential generalization is the rule of inference used to conclude that $\exists x\,P(x)$ is true when a particular element $c$ with $P(c)$ true is known.
+
+\medskip
+
+\begin{center}
+\begin{tabular}{@{}p{0.52\textwidth}l@{}}
+$\displaystyle \frac{\forall x\,P(x)}{\therefore\ P(c)}$ & \textbf{Universal Instantiation} \\[1.5em]
+$\displaystyle \frac{P(c)\ \text{for an arbitrary }c}{\therefore\ \forall x\,P(x)}$ & \textbf{Universal Generalization} \\[1.5em]
+$\displaystyle \frac{\exists x\,P(x)}{\therefore\ P(c)\ \text{for some element }c}$ & \textbf{Existential Instantiation} \\[1.5em]
+$\displaystyle \frac{P(c)\ \text{for some element }c}{\therefore\ \exists x\,P(x)}$ & \textbf{Existential Generalization}
+\end{tabular}
+\end{center}
+
+\end{document}
