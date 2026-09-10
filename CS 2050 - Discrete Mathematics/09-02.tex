@@ -1,0 +1,116 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+\textbf{CS 2050 --- Notes 09/02}
+
+\bigskip
+
+\textbf{Precedence of quantifiers.} $\forall$ and $\exists$ have higher precedence than all logical operators.
+
+\bigskip
+
+\textbf{Nested quantifiers.} A nested quantifier is when one quantifier is within the scope of another.
+
+\medskip
+
+\textbf{Example.} $\forall x \, \exists y \, (x - 2y = 5)$
+
+\bigskip
+
+Everything within the scope of a quantifier can be thought of as a propositional function.
+
+\medskip
+
+The order of quantifiers is important unless all the quantifiers are the same.
+\[
+\exists x \, \forall y \, P(x,y) \text{ is not logically equivalent to } \forall y \, \exists x \, P(x,y).
+\]
+
+\bigskip
+
+\textbf{Definition.} $P \equiv Q$ means $P \leftrightarrow Q$ is a tautology.
+
+\bigskip
+
+\textbf{Example.} $\forall x \, (W(x) \to F(x))$
+
+\medskip
+
+For all people $x$, if $x$ is a wizard, then $x$ has a funny hat. All wizards have a hat.
+
+\bigskip
+
+\textbf{Example.} $\forall x \, (W(x) \land F(x))$
+
+\medskip
+
+For all people $x$, $x$ is a wizard and has a funny hat. Everyone is a wizard and has a funny hat.
+
+\bigskip
+
+\textbf{Example.} $\exists x \, (W(x) \to F(x))$
+
+\medskip
+
+For some person $x$, if $x$ is a wizard, then $x$ has a funny hat.
+
+\bigskip
+
+\textbf{Example.} There is an adventurer in Faerun who could use a bow and a sword.
+\[
+\exists x \, (P(x) \land Q(x))
+\]
+
+\bigskip
+
+\textbf{Example.} There is an adventurer in Faerun who could use a bow but could not use a sword.
+\[
+\exists x \, (P(x) \land \lnot Q(x))
+\]
+
+\bigskip
+
+\textbf{Example.} Every adventurer in Faerun could use a bow or use a sword.
+\[
+\forall x \, (P(x) \lor Q(x))
+\]
+
+\bigskip
+
+\textbf{Example.} Some student in this class has played Dungeons and Dragons.
+
+\medskip
+
+$P(x) = $ $x$ has played D\&D. \quad Domain $=$ students in the class.
+\[
+\exists x \, P(x)
+\]
+
+\bigskip
+
+\textbf{Example.} $\forall x \, \exists y \, (x < y)$
+
+\medskip
+
+For all $x$, there exists a real number $y$ such that $x < y$.
+
+\bigskip
+
+\textbf{Example.} $\exists x \, \forall y \, (x < y)$
+
+\medskip
+
+There exists $x$ such that for all $y$, $x < y$.
+
+\bigskip
+
+\textbf{Example.} $\forall x \, \forall y \, \big( ((x < 0) \land (y < 0)) \to (xy > 0) \big)$
+
+\medskip
+
+For every $x$ and every $y$, if $x < 0$ and $y < 0$, then $xy > 0$.
+
+\end{document}
