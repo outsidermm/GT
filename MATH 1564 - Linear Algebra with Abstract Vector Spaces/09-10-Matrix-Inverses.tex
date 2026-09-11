@@ -1,0 +1,337 @@
+\documentclass[11pt]{article}
+\usepackage[letterpaper,margin=0.85in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs,array,enumitem,microtype}
+\usepackage[hidelinks]{hyperref}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.55em}
+\setlist[itemize]{leftmargin=1.6em,itemsep=0.25em,topsep=0.25em}
+\setlist[enumerate]{leftmargin=1.8em,itemsep=0.35em,topsep=0.25em}
+\newtheorem*{theorem}{Theorem}
+\newtheorem*{definition}{Definition}
+\newcommand{\RREF}{\operatorname{RREF}}
+\newcommand{\I}{I}
+\title{MATH 1564 Notes: Transposes, Inverses, and Elementary Matrices}
+\author{}
+\date{September 10, 2026}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\vspace{0.75em}
+
+\section{Transpose and Symmetric Matrices}
+
+\begin{definition}[Transpose]
+If $A$ is an $m\times n$ matrix, then $A^{T}$ is the matrix whose $i$th column is the $i$th row of $A$.
+\end{definition}
+
+\[\begin{bmatrix}1&2&3\\4&5&6\end{bmatrix}^{T}
+=\begin{bmatrix}1&4\\2&5\\3&6\end{bmatrix}.\]
+
+\begin{theorem}[Transpose rules]
+For matrices of compatible sizes and a scalar $r$,
+\begin{enumerate}
+  \item $(A^{T})^{T}=A$;
+  \item $(A+B)^{T}=A^{T}+B^{T}$;
+  \item $(rA)^{T}=rA^{T}$;
+  \item $(AB)^{T}=B^{T}A^{T}$.
+\end{enumerate}
+\end{theorem}
+
+\begin{definition}[Symmetric matrix]
+A matrix $A$ is \emph{symmetric} if $A^{T}=A$.
+\end{definition}
+
+An $n\times n$ symmetric matrix has
+\[
+\frac{n^2-n}{2}+n=\frac{n^2+n}{2}=\frac{n(n+1)}2
+\]
+independently chosen entries: the entries on and above the main diagonal determine the remaining entries.
+
+\begin{proof}[Proof that $(AB)^T=B^TA^T$]
+The $ji$ entry of $(AB)^T$ is the $ij$ entry of $AB$:
+\[
+(AB)_{ij}=a_{i1}b_{1j}+\cdots+a_{in}b_{nj}.
+\]
+Recall that the $ji$ entry of $CD$ is the product of row $j$ of $C$ with column $i$ of $D$.  Thus the $ji$ entry of $B^TA^T$ is
+\[
+\begin{bmatrix}b_{1j}&\cdots&b_{nj}\end{bmatrix}
+\begin{bmatrix}a_{i1}\\ \vdots\\ a_{in}\end{bmatrix}
+=b_{1j}a_{i1}+\cdots+b_{nj}a_{in},
+\]
+which is the same scalar.  Therefore $(AB)^T=B^TA^T$.
+\end{proof}
+
+For example,
+\[
+(ABCD)^T=D^TC^TB^TA^T.
+\]
+
+\clearpage
+\section{Invertible Matrices}
+
+\begin{definition}[Invertible / nonsingular]
+An $n\times n$ matrix $A$ is \emph{invertible} (or \emph{nonsingular}) if there is an $n\times n$ matrix $C$ such that
+\[
+CA=I_n=AC.
+\]
+We denote $C$ by $A^{-1}$.
+\end{definition}
+
+\begin{theorem}[Uniqueness of an inverse]
+The inverse $A^{-1}$ is uniquely determined by $A$.
+\end{theorem}
+
+\begin{proof}
+Suppose $C$ and $B$ are both inverses of $A$.  Then
+\[
+C=C(AB)=(CA)B=IB=B.
+\]
+\end{proof}
+
+\subsection{The $2\times2$ inverse formula}
+The matrix
+\[
+\begin{bmatrix}a&b\\c&d\end{bmatrix}
+\]
+is invertible exactly when $ad-bc\ne0$, and then
+\[
+\begin{bmatrix}a&b\\c&d\end{bmatrix}^{-1}
+=\frac1{ad-bc}\begin{bmatrix}d&-b\\-c&a\end{bmatrix}.
+\]
+
+Indeed,
+\[
+\begin{bmatrix}a&b\\c&d\end{bmatrix}
+\begin{bmatrix}d&-b\\-c&a\end{bmatrix}
+=\begin{bmatrix}ad-bc&ab-ba\\cd-dc&da-cb\end{bmatrix}
+=(ad-bc)I_2,
+\]
+and multiplication in the other order gives the same result.  For example,
+\[
+\begin{bmatrix}2&5\\-3&-7\end{bmatrix}^{-1}
+=\frac1{-14+15}\begin{bmatrix}-7&-5\\3&2\end{bmatrix}
+=\begin{bmatrix}-7&-5\\3&2\end{bmatrix}.
+\]
+
+\begin{theorem}[Rules for inverses]
+If $A$ and $B$ are invertible $n\times n$ matrices, then
+\begin{align*}
+(A^{-1})^{-1}&=A,\\
+(AB)^{-1}&=B^{-1}A^{-1},\\
+(A^T)^{-1}&=(A^{-1})^T.
+\end{align*}
+\end{theorem}
+
+\begin{proof}
+For the first rule, $A^{-1}A=I=AA^{-1}$.  For the second,
+\[
+(AB)(B^{-1}A^{-1})=A(BB^{-1})A^{-1}=AIA^{-1}=I,
+\]
+and similarly $B^{-1}A^{-1}AB=I$.  For the third,
+\[
+A^T(A^{-1})^T=(A^{-1}A)^T=I^T=I,
+\]
+and similarly $(A^{-1})^TA^T=I$.
+\end{proof}
+
+Useful consequences include
+\begin{align*}
+(ABCD)^{-1}&=D^{-1}C^{-1}B^{-1}A^{-1},\\
+(PAP^{-1})^{-1}&=(P^{-1})^{-1}A^{-1}P^{-1}=PA^{-1}P^{-1},\\
+(A^3)^{-1}&=(AAA)^{-1}=A^{-1}A^{-1}A^{-1}=(A^{-1})^3,\\
+A^0&=I.
+\end{align*}
+
+\section{Computing an Inverse and Solving Systems}
+
+\begin{theorem}
+An $n\times n$ matrix $A$ is invertible if and only if $\RREF(A)=I_n$.
+If $A$ is invertible, row reduction of the augmented matrix produces
+\[
+\left[\begin{array}{c|c}A&I_n\end{array}\right]
+\longrightarrow
+\left[\begin{array}{c|c}I_n&A^{-1}\end{array}\right].
+\]
+\end{theorem}
+
+\textbf{Example.}  To compute the inverse of
+\[
+A=\begin{bmatrix}0&1&2\\1&0&3\\0&0&1\end{bmatrix},
+\]
+row-reduce:
+\[
+\left[\begin{array}{ccc|ccc}
+0&1&2&1&0&0\\
+1&0&3&0&1&0\\
+0&0&1&0&0&1
+\end{array}\right]
+\longrightarrow
+\left[\begin{array}{ccc|ccc}
+1&0&0&0&1&-3\\
+0&1&0&1&0&-2\\
+0&0&1&0&0&1
+\end{array}\right].
+\]
+Hence
+\[
+A^{-1}=\begin{bmatrix}0&1&-3\\1&0&-2\\0&0&1\end{bmatrix}.
+\]
+
+If $A^{-1}$ is known, solve $Ax=b$ by multiplying on the left by $A^{-1}$:
+\[
+A^{-1}Ax=A^{-1}b
+\quad\Longrightarrow\quad
+Ix=A^{-1}b
+\quad\Longrightarrow\quad
+x=A^{-1}b.
+\]
+In practice, it is usually faster to solve $Ax=b$ directly by row reduction: it uses fewer operations and a smaller augmented matrix.  Computing $A^{-1}$ amounts to solving the $n$ systems
+\[
+Ax=e_i \qquad (i=1,\dots,n).
+\]
+
+\begin{theorem}[Invertibility and systems]
+Let $A$ be square.  The following are equivalent:
+\begin{enumerate}
+  \item $A$ is invertible;
+  \item $Ax=b$ is consistent for every $b$;
+  \item $Ax=0$ has only the zero solution.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}[Notes on the equivalences]
+Statement 2 holds exactly when $A$ has a pivot in every row.  Statement 3 holds exactly when $A$ has a pivot in every column.  Since $A$ is square, these are equivalent.
+
+For $1\Rightarrow3$, if $Ax=0$, then
+\[
+A^{-1}Ax=A^{-1}0=0,
+\]
+so $x=0$.  Also, an invertible $n\times n$ matrix has $n$ pivots.
+\end{proof}
+
+\clearpage
+\section{Why the Inverse Algorithm Works}
+
+Suppose an invertible $n\times n$ matrix $A$ is transformed to $I_n$ by row operations.  Each row operation is left multiplication by an elementary matrix, so for elementary matrices $E_1,\ldots,E_k$,
+\[
+E_k\cdots E_1A=I_n.
+\]
+Each $E_i$ is invertible.  Therefore
+\[
+A=E_1^{-1}E_2^{-1}\cdots E_k^{-1},
+\]
+which shows that $A$ is a product of invertible matrices and hence is invertible.  In addition,
+\[
+A^{-1}=(E_1^{-1}E_2^{-1}\cdots E_k^{-1})^{-1}=E_k\cdots E_1.
+\]
+
+If $A$ has $n$ pivots, then row reduction of $[A\mid b]$ produces $[I_n\mid d]$.  Thus
+\[
+Ax=b \quad\Longleftrightarrow\quad I_nx=d.
+\]
+
+\textbf{Example.}
+\[
+\begin{bmatrix}1&2\\3&2\end{bmatrix}x
+=\begin{bmatrix}1\\-1\end{bmatrix}.
+\]
+
+\begin{theorem}
+If $A$ is invertible, then row reduction of $[A\mid I_n]$ gives $[I_n\mid A^{-1}]$.
+\end{theorem}
+
+\begin{proof}
+As above, row reduction of
+\[
+\left[\begin{array}{c|ccc}A&e_1&\cdots&e_n\end{array}\right]
+\]
+gives
+\[
+\left[\begin{array}{c|ccc}I_n&d_1&\cdots&d_n\end{array}\right].
+\]
+For each $i$, the system $Ax=e_i$ reduces to $I_nx=d_i$.  Therefore
+\[
+d_i=x=A^{-1}e_i,
+\]
+so $d_i$ is the $i$th column of $A^{-1}$.
+\end{proof}
+
+\clearpage
+\section{Elementary Matrices}
+
+\begin{definition}
+An \emph{elementary matrix} is a matrix obtained from $I$ by a single row operation.
+\end{definition}
+
+For $2\times2$ matrices, examples are
+\[
+\begin{array}{c@{\qquad}c}
+\begin{bmatrix}0&1\\1&0\end{bmatrix} & \text{swap rows},\\[1.1em]
+\begin{bmatrix}1&0\\0&c\end{bmatrix} & \text{multiply row 2 by $c$},\\[1.1em]
+\begin{bmatrix}c&0\\0&1\end{bmatrix} & \text{multiply row 1 by $c$},\\[1.1em]
+\begin{bmatrix}1&0\\c&1\end{bmatrix} & \text{replace row 2 by row 2 plus $c$ times row 1}.
+\end{array}
+\]
+
+Elementary matrices encode row operations by left multiplication.  For example,
+\begin{align*}
+\begin{bmatrix}0&1\\1&0\end{bmatrix}
+\begin{bmatrix}1&2\\3&4\end{bmatrix}
+&=\begin{bmatrix}3&4\\1&2\end{bmatrix},\\
+\begin{bmatrix}1&0\\0&c\end{bmatrix}
+\begin{bmatrix}1&2\\3&4\end{bmatrix}
+&=\begin{bmatrix}1&2\\3c&4c\end{bmatrix},\\
+\begin{bmatrix}c&0\\0&1\end{bmatrix}
+\begin{bmatrix}1&2\\3&4\end{bmatrix}
+&=\begin{bmatrix}c&2c\\3&4\end{bmatrix},\\
+\begin{bmatrix}1&0\\c&1\end{bmatrix}
+\begin{bmatrix}1&2\\3&4\end{bmatrix}
+&=\begin{bmatrix}1&2\\c+3&2c+4\end{bmatrix}.
+\end{align*}
+
+Elementary matrices are invertible because every elementary row operation can be reversed.  If $E_1A$ is the result of one row operation and $E_2$ encodes its reverse, then
+\[
+E_2E_1A=A,
+\qquad\text{so}\qquad E_2E_1=I.
+\]
+
+\textbf{Example.}  To identify the elementary matrix for
+\[
+\begin{bmatrix}1&1&1\\-2&1&0\\0&0&1\end{bmatrix}
+\longrightarrow
+\begin{bmatrix}1&1&1\\0&3&2\\0&0&1\end{bmatrix},
+\]
+observe that the operation is $R_2\leftarrow R_2+2R_1$.  Hence
+\[
+E=\begin{bmatrix}1&0&0\\2&1&0\\0&0&1\end{bmatrix},
+\]
+and indeed
+\[
+\begin{bmatrix}1&0&0\\2&1&0\\0&0&1\end{bmatrix}
+\begin{bmatrix}1&1&1\\-2&1&0\\0&0&1\end{bmatrix}
+=\begin{bmatrix}1&1&1\\0&3&2\\0&0&1\end{bmatrix}.
+\]
+
+\clearpage
+\section{One-Sided Inverses}
+
+\textbf{Left inverse.}  $C$ is a \emph{left inverse} of $A$ if $CA=I$.
+
+\textbf{Right inverse.}  $C$ is a \emph{right inverse} of $A$ if $AC=I$.
+
+For example, a left inverse of
+\[
+\begin{bmatrix}1\\0\end{bmatrix}
+\]
+is
+\[
+\begin{bmatrix}1&0\end{bmatrix},
+\qquad
+\begin{bmatrix}1&0\end{bmatrix}
+\begin{bmatrix}1\\0\end{bmatrix}
+=\begin{bmatrix}1\end{bmatrix}=I_1.
+\]
+
+\end{document}
