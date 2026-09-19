@@ -1,0 +1,335 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+\textbf{MATH 1564 --- Notes 09/15}
+
+\bigskip
+
+\textbf{The Invertible Matrix Theorem}
+
+\medskip
+
+Let $A$ be an $n \times n$ matrix. The following statements are equivalent:
+\begin{enumerate}
+\item $A$ is invertible.
+\item $A$ is row equivalent to $I_n$.
+\item $A$ has $n$ pivot columns.
+\item $Ax = 0$ has only the trivial solution.
+\item The columns of $A$ are linearly independent.
+\item The linear transformation $x \mapsto Ax$ is one-to-one.
+\item The equation $Ax=b$ has a solution for all $b \in \mathbb{R}^n$.
+\item The columns of $A$ span $\mathbb{R}^n$.
+\item The linear transformation $x \mapsto Ax$ is onto.
+\item There is an $n \times n$ matrix $C$ such that $CA=I_n$ (a left inverse).
+\item There is an $n \times n$ matrix $D$ such that $AD=I_n$ (a right inverse).
+\item $A^T$ is invertible.
+\end{enumerate}
+
+\newpage
+
+\textbf{LU Decomposition (Factorization)}
+
+\medskip
+
+\textbf{Definition.} A matrix $A=(a_{ij})$ is \textbf{upper triangular} if $a_{ij}=0$ for all $i>j$. It is \textbf{lower triangular} if $a_{ij}=0$ for all $i<j$.
+
+\medskip
+
+\textbf{Examples of upper triangular matrices:}
+\[
+\begin{bmatrix}1&2\\0&3\end{bmatrix},
+\qquad
+\begin{bmatrix}1&-1&0\\0&0&1\\0&0&3\end{bmatrix}.
+\]
+
+\textbf{Examples of lower triangular matrices:}
+\[
+\begin{bmatrix}0&0\\2&1\end{bmatrix},
+\qquad
+\begin{bmatrix}-1&0&0\\2&3&0\\1&-1&0\end{bmatrix}.
+\]
+
+\medskip
+
+A matrix is both upper and lower triangular exactly when it is diagonal:
+\[
+\begin{bmatrix}d_1&0&0\\0&d_2&0\\0&0&d_3\end{bmatrix}.
+\]
+
+\medskip
+
+\textbf{Product of lower triangular matrices.} If $L=(\ell_{ij})$ and $M=(m_{ij})$ are lower triangular, then for $i<j$,
+\[
+(LM)_{ij}=\sum_k \ell_{ik}m_{kj}=0.
+\]
+Indeed, $\ell_{ik}=0$ when $k>i$ and $m_{kj}=0$ when $k<j$, so no term can be nonzero when $i<j$.
+
+\medskip
+
+Thus, the product of lower triangular matrices is lower triangular. Similarly, the product of upper triangular matrices is upper triangular.
+
+\medskip
+
+\textbf{Definition.} A \textbf{permutation matrix} is an $n\times n$ matrix $P$ such that
+\[
+P\begin{bmatrix}x_1\\ \vdots\\ x_n\end{bmatrix}
+=
+\begin{bmatrix}x_{i_1}\\ \vdots\\ x_{i_n}\end{bmatrix},
+\qquad
+\{i_1,\ldots,i_n\}=\{1,\ldots,n\}.
+\]
+
+\textbf{Examples:}
+\[
+P\begin{bmatrix}1\\2\end{bmatrix}
+=
+\begin{bmatrix}1\\2\end{bmatrix}
+\quad\text{or}\quad
+\begin{bmatrix}2\\1\end{bmatrix}.
+\]
+
+The $2\times2$ permutation matrices are
+\[
+\begin{bmatrix}0&1\\1&0\end{bmatrix},
+\qquad
+\begin{bmatrix}1&0\\0&1\end{bmatrix}.
+\]
+
+\newpage
+
+\textbf{Example.}
+\[
+P\begin{bmatrix}x_1\\x_2\\x_3\end{bmatrix}
+=
+\begin{bmatrix}x_2\\x_3\\x_1\end{bmatrix},
+\qquad
+P=[P(e_1)\ P(e_2)\ P(e_3)]
+=
+\begin{bmatrix}0&1&0\\0&0&1\\1&0&0\end{bmatrix}.
+\]
+
+\bigskip
+
+\textbf{Theorem (Permutated LU Factorization).} If $A$ is an $m\times n$ matrix, then
+\[
+A=PLU,
+\]
+where $P$ is an $m\times m$ permutation matrix, $L$ is lower triangular with $1$s on the diagonal, and $U$ is a row echelon form of $A$.
+
+\medskip
+
+In an intermediate step from $A$ to RREF, pivots are nonzero; entries marked $*$ may be any number.
+
+\bigskip
+
+\textbf{Motivation for LU factorization.} Suppose we are solving the systems
+\[
+Ax=b_1,\quad Ax=b_2,\quad \ldots,\quad Ax=b_k
+\]
+for one matrix $A$ and different vectors $b_i$. Repeating row operations on $A$ while reducing $[A\mid b_i]$ to RREF repeats work that can be reused.
+
+\medskip
+
+\textbf{Use of LU factorization.} Given $A=PLU$, solve $Ax=b$ by splitting it into two systems:
+\[
+Ux=y,
+\qquad
+Ly=P^{-1}b,
+\]
+where $P^{-1}$ is the inverse permutation matrix. Since $b=Ax=PLUx$, let $y=Ux$; then $Ly=P^{-1}b$.
+
+\bigskip
+
+\textbf{Example.}
+\[
+\begin{bmatrix}2&1\\0&3\end{bmatrix}
+\begin{bmatrix}x_1\\x_2\end{bmatrix}
+=
+\begin{bmatrix}1\\1\end{bmatrix}.
+\]
+Thus $x_2=\frac13$ and $x_1=\frac13$.
+
+\newpage
+
+If $A$ is $n\times n$, then finding $A=PLU$ takes $O(n^3)$ flops.
+
+\medskip
+
+A \textbf{flop} is an operation in floating-point arithmetic. $O(n^3)$ means a constant times $n^3$.
+
+\medskip
+
+Solving $Ax=b$ takes $O(n^3)$ flops, while solving the triangular systems $Ux=y$ and $Ly=P^{-1}b$ takes $O(n^2)$ flops.
+
+\bigskip
+
+\textbf{Simplifying assumption.} Suppose $A$ can be reduced to REF (or equivalently to RREF) without row swaps.
+
+\medskip
+
+\textbf{Algorithm}
+\begin{enumerate}
+\item Reduce $A$ to REF using row replacement only (no scaling).
+\item Record the row replacements in $L$.
+\end{enumerate}
+
+\bigskip
+
+\textbf{Example.}
+\begin{align*}
+A&=\begin{bmatrix}1&2&-1\\2&3&-1\\-1&1&2\end{bmatrix} \\
+&\sim\begin{bmatrix}1&2&-1\\0&-1&1\\0&3&1\end{bmatrix} \\
+&\sim\underbrace{\begin{bmatrix}1&2&-1\\0&-1&1\\0&0&4\end{bmatrix}}_{U}.
+\end{align*}
+The record of row reduction from $A$ to $U$ is
+\[
+L=
+\begin{bmatrix}1&0&0\\2&1&0\\-1&-3&1\end{bmatrix}.
+\]
+Indeed,
+\[
+LU=
+\begin{bmatrix}1&0&0\\2&1&0\\-1&-3&1\end{bmatrix}
+\begin{bmatrix}1&2&-1\\0&-1&1\\0&0&4\end{bmatrix}
+=
+\begin{bmatrix}1&2&-1\\2&3&-1\\-1&1&2\end{bmatrix}=A.
+\]
+
+\newpage
+
+If $A$ reduces to REF $U$ using only row replacements, then
+\[
+E_k\cdots E_1A=U,
+\]
+where the $E_i$ are elementary matrices for the row replacements. They are lower triangular because each operation adds a multiple of an upper row to a row below it. Therefore,
+\[
+A=\underbrace{E_1^{-1}\cdots E_k^{-1}}_{L}U.
+\]
+Each $E_i^{-1}$ is also lower triangular, and their product is lower triangular.
+
+\newpage
+
+\textbf{Subspaces}
+
+\medskip
+
+\textbf{Definition.} A set of vectors $S\subseteq\mathbb{R}^n$ is a \textbf{subspace} if $S$ is closed under addition and scaling:
+\begin{enumerate}
+\item If $u\in S$ and $c\in\mathbb{R}$, then $cu\in S$.
+\item If $u,v\in S$, then $u+v\in S$.
+\end{enumerate}
+
+\textbf{Theorem.} $S$ is a subspace if and only if, for any $c_1,\ldots,c_k\in\mathbb{R}$ and $u_1,\ldots,u_k\in S$,
+\[
+c_1u_1+\cdots+c_ku_k\in S.
+\]
+
+\bigskip
+
+\textbf{Example.} The solution space of $Ax=0$ is a subspace. If $Ax=0$ and $Ay=0$, then
+\[
+A(cx)=c(Ax)=c\cdot 0=0,
+\]
+and
+\[
+A(x+y)=Ax+Ay=0+0=0.
+\]
+
+\bigskip
+
+\textbf{Definition.}
+\[
+\operatorname{Nul} A=\{x\in\mathbb{R}^n:Ax=0\}.
+\]
+If $T(x)=Ax$, then
+\[
+\ker T=\operatorname{Nul} A.
+\]
+
+\newpage
+
+\textbf{Example.} If $v_1,\ldots,v_k\in\mathbb{R}^n$, then $\operatorname{span}\{v_1,\ldots,v_k\}$ is a subspace:
+\[
+c(c_1v_1+\cdots+c_kv_k)=cc_1v_1+\cdots+cc_kv_k,
+\]
+and
+\begin{align*}
+&(c_1v_1+\cdots+c_kv_k)+(d_1v_1+\cdots+d_kv_k)\\
+&\qquad=(c_1+d_1)v_1+\cdots+(c_k+d_k)v_k.
+\end{align*}
+
+\bigskip
+
+\textbf{Example.} If $A=[a_1\ \cdots\ a_n]$ is an $m\times n$ matrix, then
+\[
+\operatorname{Col} A=\operatorname{span}\{a_1,\ldots,a_n\}
+\]
+is a subspace of $\mathbb{R}^m$.
+
+\medskip
+
+Every subspace contains $0$, the zero vector.
+
+\bigskip
+
+\textbf{Example.} If $b\ne0$, is $\{x\in\mathbb{R}^n:Ax=b\}$ a subspace?
+
+\medskip
+
+No. $A0=0\ne b$, so the set does not contain $0$.
+
+\bigskip
+
+\textbf{Example.} Is
+\[
+S=\left\{\begin{bmatrix}x_1\\x_2\end{bmatrix}\in\mathbb{R}^2:x_1x_2=0\right\}
+\]
+a subspace?
+
+\medskip
+
+No. The sum of two vectors on the coordinate axes need not lie on either axis.
+
+\bigskip
+
+\textbf{Example.} Is a line in $\mathbb{R}^2$ a subspace?
+
+\medskip
+
+Yes, if and only if it passes through $0$.
+
+\medskip
+
+\textbf{Example.} Is $\{0\}$ a subspace of $\mathbb{R}^n$? Yes.
+
+\newpage
+
+\textbf{Definition.} A \textbf{basis} of a subspace $S$ is an independent set of vectors in $S$ that spans $S$.
+
+\medskip
+
+\textbf{Example.} The standard basis $\{e_1,\ldots,e_n\}$ is a basis of $\mathbb{R}^n$.
+
+\bigskip
+
+\textbf{Example.} Find a basis for $\operatorname{Nul} A$. Solve $Ax=0$:
+\[
+A=
+\begin{bmatrix}1&2&-1&1\\2&3&0&1\end{bmatrix}
+\sim
+\begin{bmatrix}1&2&-1&1\\0&-1&2&-1\end{bmatrix}
+\sim
+\begin{bmatrix}1&0&3&-1\\0&1&-2&1\end{bmatrix}.
+\]
+Thus
+\[
+\begin{bmatrix}x_1\\x_2\\x_3\\x_4\end{bmatrix}
+=x_3\begin{bmatrix}-3\\2\\1\\0\end{bmatrix}
++x_4\begin{bmatrix}1\\-1\\0\\1\end{bmatrix}.
+\]
+The two vectors on the right span $\operatorname{Nul} A$, are linearly independent, and form a basis for $\operatorname{Nul} A$.
+
+\end{document}
