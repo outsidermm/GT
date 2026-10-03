@@ -1,0 +1,393 @@
+\documentclass[letterpaper]{article}
+\usepackage{amsmath,amssymb}
+\usepackage[letterpaper,margin=1in]{geometry}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+\textbf{MATH 1564 --- Notes 09/24}
+
+\bigskip
+
+\[
+\frac{F_k}{r_+^k}\longrightarrow c_+ \qquad \text{(homework)}
+\]
+
+\[
+F_k\text{ grows like }c_+r_+^k
+=c_+\left(\frac{1+\sqrt5}{2}\right)^k.
+\]
+
+\bigskip
+
+\textbf{Theorem.} Let
+\[
+\operatorname{Fib}=\left\{(x_k)_{k\geq0}:x_{k+2}=x_{k+1}+x_k\right\}.
+\]
+\begin{enumerate}
+\item $\operatorname{Fib}$ is a subspace of $S$.
+\item The map $T:\operatorname{Fib}\to\mathbb{R}^2$, given by
+\[
+T\bigl((x_k)\bigr)=\begin{bmatrix}x_0\\x_1\end{bmatrix},
+\]
+is linear and invertible.
+\item $\{(r_+^k),(r_-^k)\}$ is a basis in $\operatorname{Fib}$, where
+\[
+r_\pm=\frac{1\pm\sqrt5}{2}.
+\]
+\item Any vector $(x_k)$ in $\operatorname{Fib}$ can be written as
+\[
+c_+(r_+^k)+c_-(r_-^k),
+\]
+where
+\[
+\begin{bmatrix}c_+\\c_-\end{bmatrix}
+\]
+are coordinates of $(x_k)$ in the basis $\{(r_+^k),(r_-^k)\}$.
+\end{enumerate}
+
+\bigskip
+
+\textbf{Generalization to 2nd-order recursions}
+
+\medskip
+
+Let $(x_k)$ be a sequence in $S$ such that
+\[
+x_{k+2}+a_1x_{k+1}+a_0x_k=0\quad \text{for all }k,\qquad a_0\ne0.
+\]
+
+\textbf{Theorem.} Such sequences form a 2-dimensional subspace $H$ of $S$, the vector space of all sequences.
+
+\textbf{Proof.} Let $T:H\to\mathbb{R}^2$ be
+\[
+T\bigl((x_k)_{k\geq0}\bigr)=\begin{bmatrix}x_0\\x_1\end{bmatrix}.
+\]
+Then $T$ is linear and invertible.
+
+\bigskip
+
+\textbf{How to find solutions.} Consider
+\[
+x_{k+2}+a_1x_{k+1}+a_0x_k=0,\qquad a_0\ne0.
+\]
+Search for solutions of the form $(r^k)_{k\geq0}$ for some $r\ne0$. Then
+\[
+r^{k+2}+a_1r^{k+1}+a_0r^k=0.
+\]
+Dividing by $r^k$ gives
+\[
+r^2+a_1r+a_0=0,
+\]
+so
+\[
+r=\frac{-a_1\pm\sqrt{a_1^2-4a_0}}{2}.
+\]
+
+\newpage
+
+\textbf{Case 1:} $a_1^2>4a_0$.
+
+\medskip
+
+The two nonzero roots $r_+$ and $r_-$ are two independent vectors in the 2-dimensional space $H$. They form a basis, so any vector in $H$ is
+\[
+c_+(r_+^k)+c_-(r_-^k).
+\]
+
+\textbf{Example.} $a_1=-1=a_0$: Fibonacci.
+
+\bigskip
+
+\textbf{Case 2:} $a_1^2=4a_0$.
+
+\[
+r=-\frac{a_1}{2}\ne0.
+\]
+Then $(r^k)_{k\geq0}=\left(\left(-\frac{a_1}{2}\right)^k\right)_{k\geq0}$ solves the recursion. In this case, another vector is needed to form a basis in $H$.
+
+Try
+\[
+(x_k)_{k\geq0}=(kr^k)_{k\geq0},
+\qquad r=-\frac{a_1}{2}.
+\]
+
+\textbf{Substitution.}
+\begin{align*}
+&(k+2)r^{k+2}+a_1(k+1)r^{k+1}+a_0kr^k\\
+&=r^k\left[(k+2)r^2+a_1(k+1)r+a_0k\right]\\
+&=r^k\left[(k+2)\frac{a_1^2}{4}-\frac{a_1^2}{2}(k+1)+\frac{a_1^2}{4}k\right]\\
+&=r^k\frac{a_1^2}{4}\left[k+2-2(k+1)+k\right]=0.
+\end{align*}
+Here $r=-a_1/2$ and $a_0=a_1^2/4$.
+
+\bigskip
+
+\textbf{Theorem.} If $r^2+a_1r+a_0=0$, $a_0\ne0$, has a repeated root
+\[
+r=-\frac{a_1}{2}\ne0,
+\]
+then $\{(r^k),(kr^k)\}$ is a basis in the solution space $H$.
+
+\textbf{Example.}
+\[
+x_{k+2}+2x_{k+1}+x_k=0,
+\qquad r^2+2r+1=0,
+\qquad r=-1.
+\]
+Thus
+\[
+\{(-1)^k,k(-1)^k\}
+\]
+is a basis in $H$.
+
+\newpage
+
+\textbf{Case 3:} $a_1^2<4a_0$.
+
+The equation $r^2+a_1r+a_0=0$ has two complex roots:
+\[
+r_\pm=\frac{-a_1\pm\sqrt{a_1^2-4a_0}}{2}
+=\frac{-a_1\pm i\sqrt{4a_0-a_1^2}}{2}.
+\]
+Then $(r_+^k)$ and $(r_-^k)$ solve
+\[
+x_{k+2}+a_1x_{k+1}+a_0x_k=0.
+\]
+
+\textbf{Example.} If $a_1=0$ and $a_0=1$, then
+\[
+r_\pm=\pm i,
+\]
+and $(i^k),((-i)^k)$ solve the recursion
+\[
+x_{k+2}+x_k=0.
+\]
+Also,
+\[
+i^k=(i,-1,-i,1,i,i^2,i^3,i^4,\ldots).
+\]
+
+\bigskip
+
+If $r_+^k,r_-^k$ are nonreal solutions of
+\[
+x_{k+2}+a_1x_{k+1}+a_0x_k=0,
+\]
+then
+\[
+\frac{r_+^k+r_-^k}{2},
+\qquad
+\frac{r_+^k-r_-^k}{2i}
+\]
+are real solutions.
+
+\textbf{Proof.} Since $r_-=\overline{r_+}$,
+\[
+r_-^k=\overline{r_+^k}.
+\]
+Writing $r_+^k=a+ib$ gives
+\[
+\frac{r_+^k+r_-^k}{2}
+=\frac{a+ib+a-ib}{2}=a,
+\]
+and
+\[
+\frac{r_+^k-r_-^k}{2i}
+=\frac{a+ib-(a-ib)}{2i}=b.
+\]
+
+\bigskip
+
+\textbf{Theorem.} The two real solutions
+\[
+\left(\frac{r_+^k+r_-^k}{2}\right),
+\qquad
+\left(\frac{r_+^k-r_-^k}{2i}\right)
+\]
+are independent in $S$.
+
+\textbf{Proof.} Let $u=(r_+^k)$. Then
+\[
+(r_-^k)=\overline{(r_+^k)}=\overline{u}.
+\]
+Suppose there is a real number $c$ with
+\[
+\frac{u+\overline{u}}{2}=c\frac{u-\overline{u}}{2i}.
+\]
+Then
+\[
+iu+i\overline{u}=cu-c\overline{u},
+\]
+so
+\[
+(c+i)\overline{u}=(c-i)u=(c-i)(r_+^k).
+\]
+Thus
+\[
+\left(\frac{r_+}{r_-}\right)^k=\frac{c+i}{c-i}
+\]
+is constant, which is impossible.
+
+\newpage
+
+\textbf{Theorem.} If $r_+,r_-$ are nonreal distinct roots of
+\[
+r^2+a_1r+a_0=0,
+\]
+then
+\[
+\left\{
+\frac{r_+^k+r_-^k}{2},
+\frac{r_+^k-r_-^k}{2i}
+\right\}
+\]
+is a basis in the solution space of
+\[
+x_{k+2}+a_1x_{k+1}+a_0x_k=0.
+\]
+
+\bigskip
+
+\textbf{Generalization}
+
+Let $A$ be an $n\times n$ real matrix. Let $(X_k)_{k\geq0}$ be a sequence of vectors in $\mathbb{R}^n$.
+
+Let $S^n$ be the vector space of sequences of vectors in $\mathbb{R}^n$:
+\[
+(X_1,AX_1,A^2X_1,A^3X_1,\ldots).
+\]
+
+\textbf{Recursion.}
+\[
+X_{k+1}=AX_k.
+\]
+
+\textbf{Example.} Write
+\[
+x_{k+2}+a_1x_{k+1}+a_0x_k=0
+\]
+in matrix form. Let
+\[
+A=\begin{bmatrix}0&1\\-a_0&-a_1\end{bmatrix},
+\qquad
+X_k=\begin{bmatrix}x_k\\x_{k+1}\end{bmatrix},
+\qquad
+X_{k+1}=\begin{bmatrix}x_{k+1}\\x_{k+2}\end{bmatrix}.
+\]
+Then
+\[
+X_{k+1}=AX_k
+=\begin{bmatrix}0&1\\-a_0&-a_1\end{bmatrix}
+\begin{bmatrix}x_k\\x_{k+1}\end{bmatrix}
+=\begin{bmatrix}x_{k+1}\\-a_0x_k-a_1x_{k+1}\end{bmatrix}.
+\]
+
+\textbf{Theorem.} Let $A$ be an $n\times n$ real matrix. The solution space of
+\[
+X_{k+1}=AX_k
+\]
+has dimension $n$.
+
+\textbf{Proof.}
+\[
+X_{k+1}=AX_k=AAX_{k-1}=\cdots=A^kX_1.
+\]
+Let $T:S^n\to\mathbb{R}^n$ be the map sending the sequence $(X_k)_{k\geq1}$ to $X_1$. The map is invertible, since the linear map $T$ is a linear isomorphism.
+
+\newpage
+
+\textbf{Notation.}
+\[
+z=a+ib,\qquad a,b\text{ real}.
+\]
+One can do linear algebra with matrices whose entries are complex numbers:
+\[
+\mathbb{C}^n=\{\text{all }n\times1\text{ matrices with complex entries}\}.
+\]
+One can talk about vector spaces with complex scalars.
+
+\textbf{Examples.} Polynomials with complex coefficients; sequences $(x_k)$ where each $x_k$ is a complex number.
+
+\bigskip
+
+\textbf{Theorem.} Complex conjugation commutes with addition and multiplication of complex numbers.
+
+\textbf{Corollary.} Complex conjugation commutes with addition and multiplication of matrices.
+
+\textbf{Example.}
+\[
+\overline{\begin{bmatrix}i&2+i\\-1&-1-i\end{bmatrix}}
+=\begin{bmatrix}-i&2-i\\-1&-1+i\end{bmatrix}.
+\]
+
+\textbf{Proof.} The $ij$ entry of $\overline{A+B}$ is the conjugate of the $ij$ entry of $A+B$, so
+\[
+\overline{\text{$ij$ entry of }A+\text{$ij$ entry of }B}
+=\text{$ij$ entry of }\overline{A}+\text{$ij$ entry of }\overline{B}.
+\]
+For multiplication, the $ij$ entry of $\overline{A}\,\overline{B}$ is
+\[
+\begin{bmatrix}\overline{a_{i1}}&\cdots&\overline{a_{in}}\end{bmatrix}
+\begin{bmatrix}\overline{b_{1j}}\\\vdots\\\overline{b_{nj}}\end{bmatrix}
+=\overline{a_{i1}}\,\overline{b_{1j}}+\cdots+\overline{a_{in}}\,\overline{b_{nj}}
+=\overline{a_{i1}b_{1j}+\cdots+a_{in}b_{nj}},
+\]
+which is the $ij$ entry of $\overline{AB}$.
+
+\newpage
+
+\textbf{Example: $n$th-order linear recursion}
+
+Let $(x_k)$ be a sequence of real numbers that solves
+\[
+x_{k+n}+a_{n-1}x_{k+n-1}+\cdots+a_0x_k=0,
+\qquad a_0\ne0. \tag{*}
+\]
+The space of such sequences has dimension $n$.
+
+Let
+\[
+X_k=\begin{bmatrix}x_k\\x_{k+1}\\\vdots\\x_{k+n-1}\end{bmatrix},
+\qquad
+X_{k+1}=\begin{bmatrix}x_{k+1}\\x_{k+2}\\\vdots\\x_{k+n}\end{bmatrix},
+\]
+and
+\[
+A=
+\begin{bmatrix}
+0&1&0&\cdots&0\\
+\vdots&\ddots&\ddots&\ddots&\vdots\\
+\vdots&&\ddots&\ddots&0\\
+0&\cdots&0&0&1\\
+-a_0&-a_1&\cdots&-a_{n-2}&-a_{n-1}
+\end{bmatrix}.
+\]
+Then $X_{k+1}=AX_k$.
+
+\bigskip
+
+\textbf{Theorem.} The map $(X_k)\mapsto(x_k)$ is a linear isomorphism, so the solution space of $(*)$ has dimension $n$.
+
+We assume $a_0\ne0$ because \ldots
+
+\bigskip
+
+\textbf{Example.} What is the dimension of the solution space of
+\[
+x_{k+4}-x_{k+2}+x_{k+1}=0\,?
+\]
+The index $k$ appears in the recursion only through $x_{k+1},x_{k+2},x_{k+4}$, so $x_0$ never enters it. Shifting the index (working with $(x_k)_{k\geq1}$) gives
+\[
+x_{k+3}-x_{k+1}+x_k=0,
+\]
+a 3rd-order recursion with $a_0=1\ne0$, so the theorem applies:
+\[
+\dim=3.
+\]
+
+\bigskip
+
+\textbf{Note.} We need to learn more linear algebra to solve $X_{k+1}=AX_k$. We need to compute $A^k$ for all $k$ at once.
+
+\end{document}
