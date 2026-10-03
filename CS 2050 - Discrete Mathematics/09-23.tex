@@ -1,0 +1,127 @@
+\documentclass[letterpaper]{article}
+\usepackage{amsmath,amssymb}
+\usepackage[letterpaper,margin=1in]{geometry}
+\setlength{\parindent}{0pt}
+\newcommand{\noteheader}[1]{\par\bigskip\noindent\textbf{#1}\par\medskip}
+
+\begin{document}
+
+\textbf{CS 2050 --- Notes 09/23}
+
+\noteheader{Sets and elements}
+
+A \textbf{set} is an unordered collection of distinct objects. The objects
+in a set are its \textbf{elements}. For a set $A$ and an object $a$,
+\[
+\begin{array}{ll}
+a\in A & a\text{ is an element of }A,\\[2pt]
+a\notin A & a\text{ is not an element of }A.
+\end{array}
+\]
+Uppercase letters usually name sets; lowercase letters usually name elements.
+Two sets are equal if and only if they have the same elements.
+
+\noteheader{Set-builder notation}
+
+\[
+\{x\mid x\text{ has property }P\}
+\]
+denotes the set of all $x$ with property $P$.
+
+\noteheader{Common number sets}
+
+\[
+\begin{array}{ll}
+\mathbb N=\{0,1,2,\ldots\} & \text{natural numbers},\\[3pt]
+\mathbb Z=\{\ldots,-2,-1,0,1,2,\ldots\} & \text{integers},\\[3pt]
+\mathbb Z^+=\{1,2,\ldots\} & \text{positive integers},\\[3pt]
+\mathbb Q=\{p/q\mid p,q\in\mathbb Z,\ q\ne0\} & \text{rational numbers},\\[3pt]
+\mathbb R^+ & \text{positive real numbers},\\[3pt]
+\mathbb C & \text{complex numbers}.
+\end{array}
+\]
+
+\clearpage
+
+\noteheader{Empty and singleton sets}
+
+The \textbf{empty set} has no elements and is denoted by $\varnothing$ or
+$\{\}$. A \textbf{singleton set} has exactly one element.
+
+\noteheader{Universal set}
+
+In a Venn diagram, the \textbf{universal set} $U$ contains all objects under
+consideration.
+
+\noteheader{Subsets and supersets}
+
+$A$ is a \textbf{subset} of $B$, written $A\subseteq B$, if every element
+of $A$ is also an element of $B$. Equivalently, $B$ is a \textbf{superset}
+of $A$, written $B\supseteq A$.
+\[
+A\subseteq B\quad\Longleftrightarrow\quad
+\forall x\,(x\in A\to x\in B).
+\]
+To show $A\not\subseteq B$, find an element of $A$ that is not in $B$:
+\[
+\exists x\,(x\in A\land x\notin B).
+\]
+
+\clearpage
+
+\noteheader{Theorem}
+
+For every set $S$, $\varnothing\subseteq S$ and $S\subseteq S$.
+
+\noteheader{Proof}
+
+To show $\varnothing\subseteq S$, consider the statement
+$x\in\varnothing\to x\in S$. There is no $x\in\varnothing$, so the
+implication is vacuously true for every $x$. Also, $x\in S\to x\in S$
+is true for every $x$, giving $S\subseteq S$.
+
+\noteheader{Proper subsets}
+
+$A$ is a \textbf{proper subset} of $B$, written $A\subsetneq B$, when
+$A\subseteq B$ and $A\ne B$.
+
+\noteheader{Cardinality}
+
+If a set $S$ contains exactly $n$ distinct elements, where $n$ is a
+nonnegative integer, then $S$ is \textbf{finite} and its
+\textbf{cardinality} is $|S|=n$. For example,
+\[
+|\mathbb Z|\text{ is infinite},
+\qquad
+\bigl|\{\varnothing,\mathbb N,\mathbb Z\}\bigr|=3.
+\]
+
+\noteheader{Power sets}
+
+The \textbf{power set} of $S$ is the set of all subsets of $S$, denoted
+$\mathcal P(S)$. If $|S|=n$, then
+\[
+|\mathcal P(S)|=2^n.
+\]
+
+\clearpage
+
+\noteheader{Cartesian product}
+
+For sets $A$ and $B$, their \textbf{Cartesian product} is the set of all
+ordered pairs whose first component is in $A$ and second component is in $B$:
+\[
+A\times B=\{(a,b)\mid a\in A\land b\in B\}.
+\]
+
+\noteheader{Example}
+
+The product of any set $A$ with the empty set is empty:
+\begin{align*}
+A\times\varnothing
+&=\{(a,b)\mid a\in A\land b\in\varnothing\}\\
+&=\varnothing,
+\end{align*}
+because no choice of $b\in\varnothing$ is possible.
+
+\end{document}
