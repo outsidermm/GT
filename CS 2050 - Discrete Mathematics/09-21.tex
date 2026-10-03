@@ -1,0 +1,58 @@
+\documentclass[letterpaper]{article}
+\usepackage{amsmath,amssymb}
+\usepackage[letterpaper,margin=1in]{geometry}
+\setlength{\parindent}{0pt}
+\newcommand{\noteheader}[1]{\par\bigskip\noindent\textbf{#1}\par\medskip}
+
+\begin{document}
+
+\textbf{CS 2050 --- Notes 09/21}
+
+\noteheader{Resolution: simplifying a conclusion}
+
+Suppose $p\lor q\lor r$ is true and each of $p$, $q$, and $r$ implies $s$.
+Rewrite the implications as disjunctions, then resolve:
+\[
+\begin{array}{rll}
+1.&p\lor q\lor r&\text{premise}\;\\[2pt]
+2.&\neg p\lor s&\text{from }p\to s\;\\[2pt]
+3.&\neg q\lor s&\text{from }q\to s\;\\[2pt]
+4.&\neg r\lor s&\text{from }r\to s\;\\[4pt]
+5.&q\lor r\lor s&\text{resolution of 1 and 2}\;\\[2pt]
+6.&r\lor s&\text{resolution of 5 and 3}\;\\[2pt]
+7.&s\lor s&\text{resolution of 6 and 4}\;\\[2pt]
+8.&s&\text{idempotent law.}
+\end{array}
+\]
+
+\noteheader{Another resolution example}
+
+Simplify $(p\lor q)\land(\neg p\lor q)$:
+\[
+\begin{array}{rll}
+1.&p\lor q&\text{from the conjunction}\;\\[2pt]
+2.&\neg p\lor q&\text{from the conjunction}\;\\[2pt]
+3.&q\lor q&\text{resolution of 1 and 2}\;\\[2pt]
+4.&q&\text{idempotent law.}
+\end{array}
+\]
+
+\clearpage
+
+\noteheader{Exhaustive proof}
+
+An exhaustive proof checks every possible case of a proposition. If the
+proposition holds in every case, it is proved.
+
+\noteheader{Proof by cases}
+
+Use proof by cases when one argument does not cover every possibility.
+Divide the possibilities into cases and prove the claim in each case.
+
+\noteheader{Without loss of generality}
+
+When cases are symmetric, it can be enough to prove one representative case
+and state that the others follow by the same argument. This is called
+proving the claim \textbf{without loss of generality} (WLOG).
+
+\end{document}
