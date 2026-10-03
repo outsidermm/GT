@@ -1,0 +1,53 @@
+\documentclass[letterpaper]{article}
+\usepackage{amsmath,amssymb}
+\usepackage[letterpaper,margin=1in]{geometry}
+\setlength{\parindent}{0pt}
+\newcommand{\noteheader}[1]{\par\bigskip\noindent\textbf{#1}\par\medskip}
+
+\begin{document}
+
+\textbf{CS 2050 --- Notes 09/30}
+
+\noteheader{Union of sets}
+
+For sets $A$ and $B$, the \textbf{union} $A\cup B$ contains the elements
+that are in $A$, in $B$, or in both:
+\[
+A\cup B=\{x\mid x\in A\lor x\in B\}.
+\]
+
+\noteheader{Intersection of sets}
+
+The \textbf{intersection} $A\cap B$ contains the elements that are in
+both $A$ and $B$:
+\[
+A\cap B=\{x\mid x\in A\land x\in B\}.
+\]
+
+\noteheader{Disjoint sets}
+
+Two sets are \textbf{disjoint} if their intersection is empty:
+\[
+A\cap B=\varnothing.
+\]
+
+\noteheader{Difference of sets}
+
+The \textbf{difference} $A-B$ contains the elements in $A$ that are not
+in $B$. This is the complement of $B$ relative to $A$:
+\[
+A-B=\{x\mid x\in A\land x\notin B\}.
+\]
+
+\clearpage
+
+\noteheader{Complement of a set}
+
+Let $U$ be the universal set and $A\subseteq U$. The \textbf{complement}
+of $A$ relative to $U$ contains the elements of $U$ that are not in $A$:
+\[
+A^c=U-A=\{x\in U\mid x\notin A\}.
+\]
+The notations $\overline A$ and $A^c$ both denote this complement.
+
+\end{document}
